@@ -5,7 +5,7 @@ function topologicalSortUtil(graph, node, visited, stack) {
     // Mark the current node as visited
     visited.add(node);
 
-    // Recur for all the adjacent nodes
+    // Recur for all the adjacent nodes, 
     if (graph[node]) {
         for (let neighbor of graph[node]) {
             if (!visited.has(neighbor)) {

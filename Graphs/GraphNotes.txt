@@ -1,0 +1,38 @@
+DFS vs BFS: When to Use Each?
+Both Depth-First Search (DFS) and Breadth-First Search (BFS) are fundamental graph traversal algorithms. The choice between them depends on the problem you're solving and the structure of the graph.
+
+1. When to Use DFS
+DFS explores a path deeply before backtracking, making it useful for problems that require exhaustive exploration or backtracking.
+
+✅ Best for:
+Scenario	Reason
+Pathfinding in a maze--->DFS explores one path deeply, making it useful when searching for any path from A to B.
+Detecting cycles in a graph	If a visited node is encountered again before completing traversal, there's a cycle.
+Topological sorting (DAGs)	-->DFS helps order tasks when dependencies exist (e.g., course scheduling).
+Connected components in an undirected graph	DFS helps find all nodes in a component efficiently.
+Solving puzzles (e.g., Sudoku, N-Queens)	Backtracking algorithms often use DFS to explore solutions deeply.
+Tree traversal (Preorder, Inorder, Postorder)	DFS is naturally suited for hierarchical structures like trees.
+Finding bridges & articulation points	Used in Tarjan’s algorithm for network reliability analysis.
+🚫 When NOT to Use DFS:
+If the shortest path is needed (e.g., in an unweighted graph).
+If the graph is very deep, DFS can cause stack overflow due to recursion.
+2. When to Use BFS
+BFS explores all neighbors before moving to the next level, making it ideal for shortest-path problems and scenarios requiring level-order processing.
+
+✅ Best for:
+Scenario	Reason
+Finding the shortest path in an unweighted graph	BFS guarantees the shortest path because it explores all possible paths level by level.
+Solving word ladder problems (e.g., transforming "hit" → "cog")	Each transformation is a level in the BFS tree.
+Finding the smallest number of moves in a board game (e.g., Chess - Knight’s shortest path)	BFS ensures the fewest moves are taken.
+Network broadcasting (spreading messages in networks)	BFS models the spreading process layer by layer.
+Finding all nodes at a given depth in a tree or graph	BFS naturally processes nodes level-wise.
+Web crawling	Web crawlers explore sites breadth-first, fetching URLs from a queue.
+Connected components in large graphs	BFS avoids deep recursion issues seen in DFS.
+
+🚫 When NOT to Use BFS:
+If the graph is huge, BFS can consume too much memory due to storing all nodes at a level.
+If you're dealing with problems requiring deep recursion, DFS is often more efficient.
+
+*And yet there is an iterative solution using a stack for DFS. 
+
+*Both algorithms have a time complexity of O(V+E)
