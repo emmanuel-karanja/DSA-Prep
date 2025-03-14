@@ -1,4 +1,4 @@
-/* Topolical sort is applied on Directed Acyclic Graphs to linearly order the vertices in their order . Note that a topological
+/* Topological sort is applied on Directed Acyclic Graphs to linearly order the vertices in their order . Note that a topological
    sort for a graph is not unique*/
 
 function topologicalSortUtil(graph, node, visited, stack) {
@@ -7,7 +7,8 @@ function topologicalSortUtil(graph, node, visited, stack) {
 
     // Recur for all the adjacent nodes, 
     if (graph[node]) {
-        for (let neighbor of graph[node]) {
+        let neighbors=graph[node];
+        for (let neighbor of neighbors) {
             if (!visited.has(neighbor)) {
                 topologicalSortUtil(graph, neighbor, visited, stack);
             }

@@ -1,4 +1,13 @@
-/*A way to understand inDegree, it's basically, the number of edges incident/incoming into the current node */
+/*A way to understand inDegree, it's basically, the number of edges incident/incoming into the current node
+
+ LOGIC:
+
+ 1. For each node in the graph, Initialize a key-value pair holder of node=>inDegree, initializing
+    to zero.
+ 2. For each node in the graph, get the neighbours and for each neighbour, update the inDegree.
+ 3. 
+
+*/
 
 function computeInDegree(graph) {
     let inDegree = {}; // Store in-degree counts

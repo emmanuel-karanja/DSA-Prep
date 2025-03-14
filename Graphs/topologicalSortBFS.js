@@ -1,4 +1,14 @@
-/* This is also called Kahn's algorithm and it keeps track of how many edges are incident on the current node */
+/* This is also called Kahn's algorithm and it keeps track of how many edges are incident on the current node.
+
+LOGIC
+1. Compute the inDegree of the graph nodes.
+2. Push all nodes with an inDegree of zero into a queue.
+3. Perform BFS on the graph using the queue. i.e. 
+     -deque(shift a node)
+     -add it to the result
+     - get the neighbours of the node and check if they are visited if not,
+     -for each neighbour, decrement the inDegree, if it's zero add that node to the queue.
+*/
 
 function topologicalSortBFS(graph) {
     let inDegree = {};  // Stores in-degree of each node
@@ -12,8 +22,11 @@ function topologicalSortBFS(graph) {
 
     // Compute in-degree of each node
     for (let node in graph) {
-        for (let neighbor of graph[node]) {
-            inDegree[neighbor] = (inDegree[neighbor] || 0) + 1;
+        let neighbors=graph[node];
+        if(neighbors){
+            for (let neighbor of neighbors) {
+                inDegree[neighbor] = (inDegree[neighbor] || 0) + 1;
+            }
         }
     }
 
@@ -27,7 +40,7 @@ function topologicalSortBFS(graph) {
     // Process nodes in queue
     while (queue.length > 0) {
         let current = queue.shift(); // Remove from front of queue
-        result.push(current);
+        result.push(current); 
 
         // Reduce in-degree of neighbors and add to queue if in-degree becomes 0
         for (let neighbor of graph[current]) {

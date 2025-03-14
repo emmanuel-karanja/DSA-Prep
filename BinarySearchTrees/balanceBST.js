@@ -1,5 +1,14 @@
 /*Do an inorder traversal left,root,right and push the elements into an array, and then starting at the 
-middle of the sorted array(BST always give a sorted array), rebuild the tree */
+middle of the sorted array(BST always give a sorted array), rebuild the tree
+LOGIC:
+
+*Whenever you hear trees think recursion and realize that BFS and DFS algorithms apply to trees as well.
+
+1. Check to see if the current node is the leaf node, if so return.
+2. Traverse left.
+3. push root value.
+4. traverse right
+*/
 
 class TreeNode {
     constructor(val, left = null, right = null) {

@@ -1,0 +1,12 @@
+
+14.03.2025 at 1926 hrs
+
+Of you want to know how to name the traversals:
+
+Form an isoseles triangle with root at the top, left node on the left and right node on the right.
+
+Starting from the top
+
+pre-order->root-left-right.
+inorder->left-root-right
+post-order->right,root,left
