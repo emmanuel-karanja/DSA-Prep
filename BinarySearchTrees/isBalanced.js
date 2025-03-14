@@ -13,15 +13,28 @@
  * 
 */
 
-function isBalanced(root) {
-    function dfs(node) {
-        if (!node) return 0;
-
-        let leftHeight = dfs(node.left);
-        let rightHeight = dfs(node.right);
-
-        if (leftHeight === -1 || rightHeight === -1 || Math.abs(leftHeight - rightHeight) > 1) return -1;
-        return 1 + Math.max(leftHeight, rightHeight);
+class TreeNode {
+    constructor(val, left = null, right = null) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
     }
-    return dfs(root) !== -1;
+}
+
+function isBalanced(root) {
+    function checkHeight(node) {
+        if (!node) return 0; // Base case: height of null is 0
+
+        let leftHeight = checkHeight(node.left);
+        if (leftHeight === -1) return -1; // Left subtree is unbalanced
+
+        let rightHeight = checkHeight(node.right);
+        if (rightHeight === -1) return -1; // Right subtree is unbalanced
+
+        if (Math.abs(leftHeight - rightHeight) > 1) return -1; // Current node is unbalanced
+
+        return Math.max(leftHeight, rightHeight) + 1; // Return height of current node
+    }
+
+    return checkHeight(root) !== -1;
 }
