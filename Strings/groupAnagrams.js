@@ -1,7 +1,7 @@
 /** 🔹 Problem: Given a list of words, group anagrams together.
 🔹 Example: ["eat", "tea", "tan"] → [["eat","tea"],["tan"]]
 
-🔍 LOGIC
+LOGIC
 1. Sort each word and use it as a hashmap key.
 2. Store all anagrams in hashmap buckets.
 
