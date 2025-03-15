@@ -1,0 +1,9 @@
+A Min Heap is a binary heap where the smallest element is always at the root. 
+It efficiently supports insertion, deletion, and retrieval of the minimum element in 
+
+O(logn) time.
+
+A Max Heap is a binary heap where the largest element is always at the root. 
+It efficiently supports insertion, deletion, and retrieval of the minimum element in 
+
+O(logn) time.
