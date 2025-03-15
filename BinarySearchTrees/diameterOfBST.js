@@ -37,7 +37,8 @@ class TreeNode {
       let rightHeight = height(node.right);
   
       // Diameter passing through this node
-      let localDiameter = leftHeight + rightHeight + 2;
+      let localDiameter = leftHeight + rightHeight + 2; //we account for the two edges from left and right 
+      //subtrees touching the tree root.
   
       // Update global maximum diameter
       maxDiameter = Math.max(maxDiameter, localDiameter);

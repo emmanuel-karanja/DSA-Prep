@@ -19,6 +19,7 @@ function twoSum(nums, target) {
     for (let i = 0; i < nums.length; i++) {
         let complement = target - nums[i];
 
+         //I didn't know you could do this! Sugoi!!
         if (complement in map) {
             return [map[complement], i];
         }
