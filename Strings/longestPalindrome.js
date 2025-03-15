@@ -4,35 +4,44 @@
  * LOGIC:
  * instead of generating all substrings, we expand around possible centers.
 
-1.A palindrome has a center and expands outward symmetrically.
+1.A palindrome has a center and expands outward symmetrically around each character
 2.We consider both odd-length and even-length palindromes.
 3.Start from each character and expand in both directions while characters match.
  *  */
 
 function longestPalindrome(s) {
-    if (s.length < 2) return s; // Edge case: single character or empty string.
+    //edge case where the s has a single char
+    if(s.length===1) return s;
 
-    let start = 0, maxLength = 0;
+     let maxLength=0;
 
-    function expandAroundCenter(left, right) {
-        while (left >= 0 && right < s.length && s[left] === s[right]) {
-            left--; right++; // Expand outward
-        }
-        return right - left - 1; // Length of palindrome found
-    }
+     let start=0;
 
-    for (let i = 0; i < s.length; i++) {
-        let oddLen = expandAroundCenter(i, i);       // Odd-length palindrome (single center)
-        let evenLen = expandAroundCenter(i, i + 1);  // Even-length palindrome (double center)
-        let len = Math.max(oddLen, evenLen);
+   //helper to expand around center
+   function expandAroundCenter(left,right){
+     
+    //we are within bounds and have a palindrome
+     if(left>0 && right < s.length && s[left]===s[right]){
+         left--; right++; //expand
+     }
+     return right-left-1; //return the length of the current palindrome
+   }
 
-        if (len > maxLength) {
-            maxLength = len;
-            start = i - Math.floor((len - 1) / 2);
-        }
-    }
+    //expand around each char
+   for(let i=0;i<s.length-1;i++){
+      let oddLength=expandAroundCenter(i,i); //odd
+      let evenLength=expandAroundCenter(i,i+1); //even
+      let currentLength=0;
+      currentLength=Math.max(oddLength,evenLength)
 
-    return s.substring(start, start + maxLength);
+     if(currentLength > maxLength){
+         maxLength=currentLength;
+         start=i - Math.floor((len - 1) / 2);
+     }
+   }
+
+   return s.substring(start, start + maxLength)
+   
 }
 
 //Time O(N^2) 
