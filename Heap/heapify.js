@@ -55,3 +55,12 @@ function heapifyMinHeap(arr, n, i) {
     }
 }
            
+
+function buildMaxHeap(arr) {
+    let n = arr.length;
+
+    // Start from last non-leaf node and heapify each node
+    for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+        heapifyMaxHeap(arr, n, i);
+    }
+}
