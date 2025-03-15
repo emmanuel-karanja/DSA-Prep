@@ -6,8 +6,8 @@ function topologicalSortUtil(graph, node, visited, stack) {
     visited.add(node);
 
     // Recur for all the adjacent nodes, 
-    if (graph[node]) {
-        let neighbors=graph[node];
+    let neighbors=graph[node];
+    if (neighbors) {
         for (let neighbor of neighbors) {
             if (!visited.has(neighbor)) {
                 topologicalSortUtil(graph, neighbor, visited, stack);
