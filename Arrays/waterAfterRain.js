@@ -10,31 +10,31 @@
  */
 
 function waterAfterRain(bars = []) {
-    if (bars.length < 3) return 0; // We must have at least 3 bars to collect water.
+    if (height.length === 0) return 0;
 
-    let left = 0, right = bars.length - 1;
-    let leftMax = bars[left];  // Initialize correctly
-    let rightMax = bars[right]; // Initialize correctly
-    let waterCollected = 0;
+    let left = 0, right = height.length - 1;
+    let leftMax = 0, rightMax = 0;
+    let totalWater = 0;
 
     while (left < right) {
-        if (leftMax < rightMax) {
-            left++; // Move left pointer first
-            if (bars[left] < leftMax) {
-                waterCollected += leftMax - bars[left]; // Collect water
+        if (height[left] < height[right]) {
+            if (height[left] >= leftMax) {
+                leftMax = height[left];
             } else {
-                leftMax = bars[left]; // Update leftMax
+                totalWater += leftMax - height[left];
             }
+            left++;
         } else {
-            right--; // Move right pointer first
-            if (bars[right] < rightMax) {
-                waterCollected += rightMax - bars[right]; // Collect water
+            if (height[right] >= rightMax) {
+                rightMax = height[right];
             } else {
-                rightMax = bars[right]; // Update rightMax
+                totalWater += rightMax - height[right];
             }
+            right--;
         }
     }
-    return waterCollected;
+
+    return totalWater;
 }
 
 const testBars=[0,1,0,2,1,0,1,3,2,1,2,1];
