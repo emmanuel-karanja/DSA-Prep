@@ -18,6 +18,7 @@ function generatePascalsTriangle(n) {
         
         //j starts from position 1 and terminates at i-1
         for (let j = 1; j < i; j++) { 
+            //i-1 is the previous row?, so j-1 is the number before and j is the current?
             currentRow[j] = triangle[i - 1][j - 1] + triangle[i - 1][j];  // Sum of two above
         }
         
