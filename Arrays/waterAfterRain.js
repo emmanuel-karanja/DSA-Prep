@@ -9,7 +9,7 @@
  * 4. At a given bar, we either update leftMax or rightMax or collect water.
  */
 
-function waterAfterRain(bars = []) {
+function waterAfterRain(height = []) {
     if (height.length === 0) return 0;
 
     let left = 0, right = height.length - 1;
