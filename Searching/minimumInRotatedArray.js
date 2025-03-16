@@ -11,6 +11,8 @@ Since the array is rotated, the smallest element is the pivot point where rotati
   - If nums[mid] > nums[right], the pivot is in the right half.
   - If nums[mid] < nums[right], the pivot is in the left half.
 - - Narrow down until left == right, which gives the minimum.
+
+Time O(logN)
 */
 
 function findMin(nums) {
