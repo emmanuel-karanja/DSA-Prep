@@ -16,6 +16,8 @@
  * Think of bactracking as a way to building a choice tree, and backtracking is moving back
  * towards the root of the current node candidate i.e. unchoosing a choice.
  * 
+ * Permutations computation is one of the best examples.
+ * 
  */
 
 function permutations(choices=[]){
