@@ -34,4 +34,4 @@ function generateBalancedBrackets(n) {
 }
 
 // Example Usage
-console.log(generateBalancedBrackets(3));
+console.log(generateBalancedBrackets(4));
