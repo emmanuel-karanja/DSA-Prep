@@ -19,8 +19,11 @@ function computeInDegree(graph) {
 
     // Calculate in-degree by counting incoming edges
     for (let node in graph) {
-        for (let neighbor of graph[node]) {
-            inDegree[neighbor] = (inDegree[neighbor] || 0) + 1;
+        let neighbours=graph[node];
+        if(neighbours){
+            for (let neighbor of neighbours) {
+                inDegree[neighbor] = (inDegree[neighbor] || 0) + 1;
+            }
         }
     }
 

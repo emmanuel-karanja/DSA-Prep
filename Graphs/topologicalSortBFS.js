@@ -6,7 +6,7 @@ LOGIC
 3. Perform BFS on the graph using the queue. i.e. 
      -deque(shift a node)
      -add it to the result
-     - get the neighbours of the node and check if they are visited if not,
+     -get the neighbours of the node and check if they are visited if not,
      -for each neighbour, decrement the inDegree, if it's zero add that node to the queue.
 */
 
@@ -15,20 +15,28 @@ function topologicalSortBFS(graph) {
     let queue = [];     // Queue for BFS
     let result = [];    // Stores the sorted order
 
-    // Initialize in-degree of all nodes to 0
-    for (let node in graph) {
-        inDegree[node] = 0;
-    }
-
-    // Compute in-degree of each node
-    for (let node in graph) {
-        let neighbors=graph[node];
-        if(neighbors){
-            for (let neighbor of neighbors) {
-                inDegree[neighbor] = (inDegree[neighbor] || 0) + 1;
+    function computeInDegree(graph) {
+        let inDegree = {}; // Store in-degree counts
+    
+        // Initialize in-degree for each node
+        for (let node in graph) {
+            inDegree[node] = 0;
+        }
+    
+        // Calculate in-degree by counting incoming edges
+        for (let node in graph) {
+            let neighbours=graph[node];
+            if(neighbours){
+                for (let neighbor of neighbours) {
+                    inDegree[neighbor] = (inDegree[neighbor] || 0) + 1;
+                }
             }
         }
+    
+        return inDegree;
     }
+
+    inDegree=computeInDegree(graph);
 
     // Add nodes with in-degree 0 to the queue
     for (let node in inDegree) {
@@ -43,7 +51,8 @@ function topologicalSortBFS(graph) {
         result.push(current); 
 
         // Reduce in-degree of neighbors and add to queue if in-degree becomes 0
-        for (let neighbor of graph[current]) {
+        let neighbours=graph[current]
+        for (let neighbor of neighbours) {
             inDegree[neighbor]--;
             if (inDegree[neighbor] === 0) {
                 queue.push(neighbor);

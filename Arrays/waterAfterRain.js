@@ -17,6 +17,7 @@ function waterAfterRain(height = []) {
     let totalWater = 0;
 
     while (left < right) {
+        //compare height[left] and height[right]
         if (height[left] < height[right]) {
             if (height[left] >= leftMax) {
                 leftMax = height[left];
