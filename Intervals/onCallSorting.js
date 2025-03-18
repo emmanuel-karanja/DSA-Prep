@@ -20,7 +20,8 @@ const schedules = {
         });
       });
     }
-  
+
+    
     // Optional: Sort the result by the first element of the on-call array (start time)
     result = result.sort((a, b) => {
       const [aStart] = a.onCall;
