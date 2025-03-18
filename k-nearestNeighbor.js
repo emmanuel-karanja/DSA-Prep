@@ -23,6 +23,8 @@ Commonly used Distance functions:
  * 2. Sort the distances in ascending order
  * 3. Get the first k of them.
  * 4. Return those points
+ * 
+ Time O(nlogn)
  */
 
 function kClosest(points, k, target) {

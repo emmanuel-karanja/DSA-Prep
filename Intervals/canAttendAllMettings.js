@@ -4,7 +4,8 @@
  * 
  * LOGIC
  * 1. Sort the intervals by start time.
-   2. Check for overlap: If meetings[i][0] < meetings[i - 1][1], return false.
+   2. Check for overlap: If meetings[i][0] < meetings[i - 1][1], return false. i.e. the start time for the current meeting is 
+      less than(earlier) than the end time of the previous meeting
    3. If no overlaps exist, return true.
  */
 function canAttendMeetings(intervals) {
