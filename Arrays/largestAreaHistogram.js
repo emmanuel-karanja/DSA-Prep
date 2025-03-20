@@ -49,3 +49,29 @@ function largestRectangleArea(heights) {
 // Example usage:
 let histogram = [2, 1, 5, 6, 2, 3];
 console.log(largestRectangleArea(histogram)); // Output: 10
+
+
+//Using a monotonic stack in O(n) time
+
+function largestRectangleArea(heights) {
+    let maxArea = 0;
+    let stack = []; // Monotonic increasing stack (stores indices)
+    
+    for (let i = 0; i <= heights.length; i++) {
+        // Use a sentinel value at the end
+        let h = (i === heights.length) ? 0 : heights[i];
+
+        while (stack.length > 0 && h < heights[stack[stack.length - 1]]) {
+            let height = heights[stack.pop()];
+            let width = stack.length === 0 ? i : i - stack[stack.length - 1] - 1;
+            maxArea = Math.max(maxArea, height * width);
+        }
+
+        stack.push(i);
+    }
+
+    return maxArea;
+}
+
+// Example Usage
+console.log(largestRectangleArea([2,1,5,6,2,3])); // Output: 10
