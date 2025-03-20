@@ -3,13 +3,14 @@
  * 
  * LOGIC:
  * 
- * We always seek the next greater or smaller to the right of the element. And we are looking for the NEAREST greater or smaller
+ * GOAL: We are looking for the NEAREST greater or smaller than the current element at index i in the array.
  * 
  * 1. Iterate over the array starting from the right (for  next greater than) or the left (for next smaller than)
- * 2. If stack is not empty, we look at the top element, if it's greater, we pop the top element and continue
- *    popping until the element at the top is greater or smaller than the current element.
+ * 2. If stack is not empty, we look at the top element, if it's lesser or equal to (or greater), we pop the top element and continue
+ *    popping stack until the element at the top is greater or smaller than the current element.
  * 3. If stack is not empty, we know the current top is the next smaller or greater.
  * 4. We add it to the result for the current index i.
+ * 5. Push the current element on to the stack.
  * 
  * 
  * *Our end goal is not generate a result array such that at each matching index, the result will tell us this is the next greater

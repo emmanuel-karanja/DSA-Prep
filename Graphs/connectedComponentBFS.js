@@ -1,9 +1,7 @@
 /*A connected component is a subgraph where every node is reachable from any other node within that subgraph. 
 If a graph has multiple disconnected parts, each part is a separate connected component.
 
-LOGIC
-
-1. 
+     - 
 
 */
 
