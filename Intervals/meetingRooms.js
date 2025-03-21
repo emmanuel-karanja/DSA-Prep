@@ -16,7 +16,7 @@
    function minMeetingRooms(intervals) {
     if (intervals.length === 0) return 0;
 
-    //Noice the elegant way to extract the startTimes and endTimes
+    //Notice the elegant way to extract the startTimes and endTimes
     let startTimes = intervals.map(i => i[0]).sort((a, b) => a - b);
     let endTimes = intervals.map(i => i[1]).sort((a, b) => a - b);
 
