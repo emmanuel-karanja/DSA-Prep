@@ -1,60 +1,79 @@
-/**[HARD]
- * Given two sorted arrays nums1 and nums2 of sizes m and n, find the median of the two sorted arrays.
- *  The overall time complexity must be O(log (m+n)).
+/**PROBLEM: Find the median of two sorted arrays. Ensure the Time complexity is O(min(logn)).
  * 
- * LOGIC
+ * LOGIC:
+ * We can't merge, merging is O(m+n) and O(logn) signals an aspect of binary search
  * 
- * 1. Find the combined length of the two arrays and find the middle i.e. (m+n)/2=mid
- * 2. Look at at the smaller array and find partition at the middle e.g. m/2=smallerMid
- * 3. The partition on the larger array will be mid-smallerMid= biggerMid this tells us the size of larger array to pick.
- * 4. Test the correctness of the partition i,e.
- *       - the last element in the larger partition is greater or equal to the element to the right of the rightmost element in the smaller array partition AND
- *        -the last element in the smaller array partition is greater or equal to the element to the right of the rightmost element in the larger array partition
- *    
- *     *If not for any of them, move the left pointer of that array to the element to the right of the smaller or largerMid and find the floor  of (left+right)/2
- *      consider the partition from 0 to newMid
- *     recalculate the partition of the other aray and test the correctness of the partition
- * 
- * *We always end up running Binary Search on the smaller array
- * 
- *  */
+ * Strategy: Binary Search on the Smaller Array
+We are going to:
+
+Imagine cutting both arrays so the left half has half the total elements
+Find the perfect partition such that:
+1. All values in the left half are ≤ values in the right half
+2. Use binary search to adjust the cut until we find that condition
+
+We want:
+
+L1 is the first arrays, left half and R1 is first arrays' right half.
+L2 and R2 ditto (the second array)
+
+max(L1, L2) <= min(R1, R2)
+Then median is:
+
+If odd: max(L1, L2)
+If even: (max(L1, L2) + min(R1, R2)) / 2
+
+LOGIC
+
+Always do binary search on the smaller array for efficiency.
+Partition both arrays such that:
+Left side has ⌊(m + n + 1)/2⌋ elements total
+Use binary search to find the right cut
+
+We do: 
+Math.floor((x + y + 1) / 2)
+to guarantee the left half always has the correct number of elements,
+especially when the total number of elements is odd.
+
+*/
 
 function findMedianSortedArrays(nums1, nums2) {
     if (nums1.length > nums2.length) {
-        return findMedianSortedArrays(nums2, nums1); // Ensure nums1 is smaller
+        // Ensure binary search is on smaller array
+        return findMedianSortedArrays(nums2, nums1);
     }
 
-    let x = nums1.length, y = nums2.length;
-    let low = 0, high = x;
+    let x = nums1.length;
+    let y = nums2.length;
+    let low = 0, high = x; //note this carefully, we are using the smaller of the two arrays
 
     while (low <= high) {
         let partitionX = Math.floor((low + high) / 2);
         let partitionY = Math.floor((x + y + 1) / 2) - partitionX;
 
-        // Edge cases (use -Infinity and +Infinity)
-        let maxLeftX = (partitionX === 0) ? -Infinity : nums1[partitionX - 1];
-        let minRightX = (partitionX === x) ? Infinity : nums1[partitionX];
+        // Handle edges
+        let maxLeftX = partitionX === 0 ? -Infinity : nums1[partitionX - 1];
+        let minRightX = partitionX === x ? Infinity : nums1[partitionX];
 
-        let maxLeftY = (partitionY === 0) ? -Infinity : nums2[partitionY - 1];
-        let minRightY = (partitionY === y) ? Infinity : nums2[partitionY];
+        let maxLeftY = partitionY === 0 ? -Infinity : nums2[partitionY - 1];
+        let minRightY = partitionY === y ? Infinity : nums2[partitionY];
 
-        // Correct partition found
+        // Found correct partition
         if (maxLeftX <= minRightY && maxLeftY <= minRightX) {
-            if ((x + y) % 2 === 0) {
-                return (Math.max(maxLeftX, maxLeftY) + Math.min(minRightX, minRightY)) / 2.0;
-            } else {
+            if ((x + y) % 2 === 0) { //is even case
+                return (Math.max(maxLeftX, maxLeftY) + Math.min(minRightX, minRightY)) / 2;
+            } else { //is odd case
                 return Math.max(maxLeftX, maxLeftY);
             }
-        } else if (maxLeftX > minRightY) {
-            high = partitionX - 1; // Move left
-        } else {
-            low = partitionX + 1; // Move right
+        } //
+
+        else if (maxLeftX > minRightY) { //if the partition of the smaller array is too far right we move high to ther
+            // Move left in nums1
+            high = partitionX - 1;
+        } else { //it's too low i.e. minRghtY > maxLeftX
+            // Move right in nums1
+            low = partitionX + 1;
         }
     }
-    
-    throw new Error("Input arrays are not sorted.");
-}
 
-// Example Cases
-console.log(findMedianSortedArrays([1, 3], [2])); // Output: 2.0
-console.log(findMedianSortedArrays([1, 2], [3, 4])); // Output: 2.5
+    throw new Error("Input arrays are not sorted correctly.");
+}
