@@ -45,6 +45,7 @@ function minWindow(s, t) {
             }
 
             let leftChar = s[left];
+            //reduce windowCount for that and check if we need to reduce formed.
             windowCount.set(leftChar, windowCount.get(leftChar) - 1);
             if (charMap.has(leftChar) && windowCount.get(leftChar) < charMap.get(leftChar)) {
                 formed--;

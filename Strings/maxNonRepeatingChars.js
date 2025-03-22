@@ -18,6 +18,7 @@ function longestUniqueSubstring(s) {
     let longestSubstring = "";
 
     for (let right = 0; right < s.length; right++) {
+        //reduce the sliding wndow size
         while (charSet.has(s[right])) {
             charSet.delete(s[left]);
             left++;
