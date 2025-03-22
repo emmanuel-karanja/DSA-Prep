@@ -13,12 +13,12 @@ function subarraySum(nums, k) {
     for (const num of nums) {
         currentSum += num;
 
-        /**Check if the complement exists in the map */
+        /**Check if the prefix sum exists in the map */
         if (prefixMap.has(currentSum - k)) {
-            /*so the value is the number of occurrences of the complement? yes */
+            /*so the value is the number of occurrences of the prefix sum? yes */
             count += prefixMap.get(currentSum - k);
         }
-        //else add the sum and the occurences
+        //else add the prefix sum and the occurences
         prefixMap.set(currentSum, (prefixMap.get(currentSum) || 0) + 1);
     }
 
