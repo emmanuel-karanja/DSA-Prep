@@ -19,6 +19,7 @@ function wordBreakRecursive(s, wordDict) {
     function canBreak(start) {
         if (start === s.length) return true; //we are at the end
 
+        //given the current start, keep adding one character to it until we find a word.
         for (let end = start + 1; end <= s.length; end++) {
             const prefix = s.slice(start, end);
             if (wordSet.has(prefix) && canBreak(end)) {

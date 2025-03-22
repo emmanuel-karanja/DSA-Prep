@@ -54,7 +54,8 @@ function shortestPathBinaryMatrix(grid) {
             
             // Check if within bounds and not visited
             if (newRow >= 0 && newRow < n && newCol >= 0 && newCol < n && grid[newRow][newCol] === 0) {
-                queue.push([newRow, newCol, steps + 1]);
+                let newSteps=steps+1;
+                queue.push([newRow, newCol, newSteps]);
                 //visit
                 grid[newRow][newCol] = 1; // Mark as visited
             }
