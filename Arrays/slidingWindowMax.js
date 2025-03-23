@@ -94,7 +94,9 @@ function maxSlidingWindow(nums, k) {
 
     for (let i = 0; i < nums.length; i++) {
 
-        // Remove elements outside the window
+        // Remove elements outside the window.
+        // i-k is the index of the element that just slid out, the current deque[0] is i-k+1
+        //At index i, the window contains indices [i - k + 1, i]. 
         if (deque.length && deque[0] <= i - k) {
             deque.shift();
         }

@@ -18,29 +18,28 @@
  * 
  * Time O(n) single pass and Space O(n) due to the result array
  * 
+ * WE STORE INDICES
+ * 
  * 1. P
  */
 
 
 //monotonic decreasing
 function nextGreaterElements(nums) {
-    let result = new Array(nums.length).fill(-1);
-    let stack = []; // Monotonic decreasing stack
+    const result = Array(nums.length).fill(-1);
+    const stack = []; // stores indices
 
-    for (let i = nums.length - 1; i >= 0; i--) {
-        // Remove smaller elements from stack
-        while (stack.length > 0 && stack[stack.length - 1] <= nums[i]) {
-            stack.pop();
+    for (let i = 0; i < nums.length; i++) {
+        while (stack.length > 0 && nums[i] > nums[stack[stack.length - 1]]) {
+            const idx = stack.pop();
+            result[idx] = nums[i];
         }
-        // If stack is not empty, top is the next greater element
-        if (stack.length > 0) {
-            result[i] = stack[stack.length - 1];
-        }
-        // Push current number onto stack
-        stack.push(nums[i]);
+        stack.push(i);
     }
+
     return result;
 }
+
 
 // Example
 console.log(nextGreaterElements([2, 1, 2, 4, 3])); 

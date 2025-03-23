@@ -32,7 +32,7 @@ function maxPathSum(root) {
 
         // Max path sum WITH split at current node. This is a V-shaped path — includes both subtrees
         // i.e. left-->current-->right, we don't return this to the parent because it splits and we get two paths
-        //that's not what we want
+        //that's not what we want. We want to keep this incase it turns out to be the pathsum
         let priceNewPath = node.val + leftGain + rightGain;
 
         // Update global max if it's better, 
@@ -66,11 +66,7 @@ function maxPathSumWithPath(root) {
         const rightGain = Math.max(right.gain, 0);
 
         // Build the current path through this node (may split)
-        const currentPath = [
-            ...(left.gain > 0 ? left.path : []),
-            node.val,
-            ...(right.gain > 0 ? right.path : [])
-        ];
+        const currentPath = [...(left.gain > 0 ? left.path : []), node.val, ...(right.gain > 0 ? right.path : [])];
         const currentSum = node.val + leftGain + rightGain;
 
         // Update global max and best path if needed

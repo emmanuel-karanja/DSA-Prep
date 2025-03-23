@@ -13,10 +13,11 @@ function subarraySum(nums, k) {
     for (const num of nums) {
         currentSum += num;
 
+        let target=currentSum-k;
         /**Check if the prefix sum exists in the map */
-        if (prefixMap.has(currentSum - k)) {
+        if (prefixMap.has(target)) {
             /*so the value is the number of occurrences of the prefix sum? yes */
-            count += prefixMap.get(currentSum - k);
+            count += prefixMap.get(target);
         }
         //else add the prefix sum and the occurences
         prefixMap.set(currentSum, (prefixMap.get(currentSum) || 0) + 1);

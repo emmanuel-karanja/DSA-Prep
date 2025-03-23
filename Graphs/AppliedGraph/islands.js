@@ -44,7 +44,7 @@ function numIslands(grid) {
     for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
             //if we counter a 1, we DFS
-            if (grid[r][c] === '1') {
+            if (grid[r][c] === '1') { //we only explore when we find land.
                 numIslands++;
                 dfs(r, c); // Explore the island
             }
