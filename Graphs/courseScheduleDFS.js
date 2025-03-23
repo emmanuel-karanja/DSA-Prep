@@ -1,6 +1,15 @@
+ /**
+  * 
+  * LOGIC
+  * 
+  * 1. First convert to b->a i.e. course=>prerequisite
+  * 2. Have a visited array or set
+  * 3. DFS with visited and visiting.
+  */
+
 function canFinish(numCourses, prerequisites) {
     const graph = Array.from({ length: numCourses }, () => []);
-    
+
     for (const [a, b] of prerequisites) {
         graph[b].push(a); // b → a
     }

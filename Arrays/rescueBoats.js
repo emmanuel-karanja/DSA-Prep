@@ -6,6 +6,7 @@ LOGIC:
 
 1. Sort the people by weights.
 2. Match the heaviest with the lightest to get the minimum number of boats This means using two pointers.
+3. The heaviest person always gets a boat.
 
 
 */

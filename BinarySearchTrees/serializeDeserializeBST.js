@@ -1,3 +1,7 @@
+/**Serialize and deserialize a binary tree.
+ * 
+ */
+
 function serialize(root) {
     if (!root) return "[]";  // Edge case
 
@@ -7,10 +11,11 @@ function serialize(root) {
         let node = queue.shift();
         
         if (node) {
+
             result.push(node.val);
             queue.push(node.left);
             queue.push(node.right);
-        } else {
+        } else { //null cases
             result.push(null);
         }
     }
@@ -32,7 +37,7 @@ function deserialize(data) {
             node.left = new TreeNode(nodes[i]);
             queue.push(node.left);
         }
-        i++;
+        i++; //alwways increment
 
         if (nodes[i] !== null) {
             node.right = new TreeNode(nodes[i]);
