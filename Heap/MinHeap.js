@@ -1,4 +1,4 @@
-export class MinHeap {
+class MinHeap {
     constructor() {
         this.data = [];
     }
@@ -40,6 +40,9 @@ export class MinHeap {
         console.log(this.data);
     }
 
+    size(){
+        return this.data.length;
+    }
     _bubbleDown() {
         let i = 0;
         const length = this.data.length;
@@ -72,3 +75,4 @@ console.log(heap.extractMin()); // 3
 console.log(heap.peek());   
 heap.display()    // 5
 
+module.exports=MinHeap
