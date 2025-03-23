@@ -23,9 +23,11 @@ class TreeNode {
 // Step 1: Convert BST to Sorted Array using Inorder Traversal
 function inorderTraversal(root, result = []) {
     if (!root) return;
+
     inorderTraversal(root.left, result);
     result.push(root.val);
     inorderTraversal(root.right, result);
+    
     return result;
 }
 
