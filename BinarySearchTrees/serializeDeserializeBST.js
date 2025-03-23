@@ -2,6 +2,27 @@
  * 
  */
 
+class TreeNode{
+    constructor(val=0,left=null,right=null){
+        this.val=val;
+        this.left=left;
+        this.right=right;
+    }
+}
+
+// Step 2: Build Balanced BST from Sorted Array
+function buildBalancedBST(arr, start = 0, end = arr.length - 1) {
+    if (start > end) return null;
+    
+    let mid = Math.floor((start + end) / 2);
+    let node = new TreeNode(arr[mid]);
+
+    node.left = buildBalancedBST(arr, start, mid - 1);
+    node.right = buildBalancedBST(arr, mid + 1, end);
+
+    return node;
+}
+
 function serialize(root) {
     if (!root) return "[]";  // Edge case
 
@@ -21,6 +42,8 @@ function serialize(root) {
     }
     return JSON.stringify(result);
 }
+
+
 
 function deserialize(data) {
     let nodes = JSON.parse(data);
@@ -47,3 +70,17 @@ function deserialize(data) {
     }
     return root;
 }
+
+const arr=[4, 2, 5, 1, 6, 3, 7]
+
+const root=buildBalancedBST(arr);
+
+console.log(root)
+
+const serial=serialize(root)
+
+console.log(serial)
+
+const deserial=deserialize(serial)
+
+console.log(deserial)

@@ -21,6 +21,7 @@
    */
 
 function lowestCommonAncestorBST(root, p, q) {
+    //shows a good way to traverse a tree without recursion. 
     while (root) {
         if (p.val < root.val && q.val < root.val) {
             root = root.left; // Move left
