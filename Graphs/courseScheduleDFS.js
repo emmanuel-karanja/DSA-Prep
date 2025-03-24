@@ -10,6 +10,8 @@
 function canFinish(numCourses, prerequisites) {
     const graph = Array.from({ length: numCourses }, () => []);
 
+    const courseOrder=[]
+
     for (const [a, b] of prerequisites) {
         graph[b].push(a); // b → a
     }
@@ -27,6 +29,7 @@ function canFinish(numCourses, prerequisites) {
         }
 
         visited[course] = 2; // mark as fully visited
+        courseOrder.push(course)
         return true;
     }
 
