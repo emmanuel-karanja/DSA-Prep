@@ -35,3 +35,35 @@ function mergeKSortedArrays(arrays) {
 
     return result;
 }
+
+
+/**Divide and Conquer, is still O(nlogk) */
+
+function mergeKSortedArrays(arrays) {
+    if (!arrays.length) return [];
+
+    function mergeTwo(arr1, arr2) {
+        let i = 0, j = 0;
+        const result = [];
+
+        while (i < arr1.length && j < arr2.length) {
+            if (arr1[i] < arr2[j]) {
+                result.push(arr1[i++]);
+            } else {
+                result.push(arr2[j++]);
+            }
+        }
+        return result.concat(arr1.slice(i)).concat(arr2.slice(j));
+    }
+
+    function mergeHelper(start, end) {
+        if (start === end) return arrays[start];
+
+        const mid = Math.floor((start + end) / 2);
+        const left = mergeHelper(start, mid);
+        const right = mergeHelper(mid + 1, end);
+        return mergeTwo(left, right);
+    }
+
+    return mergeHelper(0, arrays.length - 1);
+}
