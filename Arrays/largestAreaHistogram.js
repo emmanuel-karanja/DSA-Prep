@@ -54,17 +54,22 @@ console.log(largestRectangleArea(histogram)); // Output: 10
 //Using a monotonic stack in O(n) time
 
 function largestRectangleArea(heights) {
+    const stack = []; // Monotonic increasing stack (stores indices)
     let maxArea = 0;
-    let stack = []; // Monotonic increasing stack (stores indices)
-    
-    for (let i = 0; i <= heights.length; i++) {
-        // Use a sentinel value at the end
-        let h = (i === heights.length) ? 0 : heights[i];
 
-        while (stack.length > 0 && h < heights[stack[stack.length - 1]]) {
-            let height = heights[stack.pop()];
-            let width = stack.length === 0 ? i : i - stack[stack.length - 1] - 1;
-            maxArea = Math.max(maxArea, height * width);
+    // Add a sentinel bar of height 0 at the end to flush out the stack
+    heights.push(0);
+
+    for (let i = 0; i < heights.length; i++) {
+        while (stack.length > 0 && heights[i] < heights[stack[stack.length - 1]]) {
+            const poppedIndex = stack.pop();
+            const height = heights[poppedIndex];
+
+            // Width is current index - index of previous smaller element - 1
+            const width = stack.length === 0 ? i : i - stack[stack.length - 1] - 1;
+
+            const area = height * width;
+            maxArea = Math.max(maxArea, area);
         }
 
         stack.push(i);
@@ -72,6 +77,7 @@ function largestRectangleArea(heights) {
 
     return maxArea;
 }
+
 
 // Example Usage
 console.log(largestRectangleArea([2,1,5,6,2,3])); // Output: 10

@@ -1,8 +1,20 @@
-/**Two-Pointer (Optimal)
+/**PROBLEM
+ * Given an array of integers nums, return all unique triplets [nums[i], nums[j], nums[k]] such that:
+   i != j != k
+  nums[i] + nums[j] + nums[k] == 0
+
+The solution should not contain duplicate triplets.
+ *
+SOLUTION
+ * Three-Pointer (Optimal)
+
+i is fixed
+left  starts at i+1
+and right starts at the end of the array
 Logic:
-Sort the array → Helps in avoiding duplicates.
-Fix one element (i), then use Two-Pointer approach to find b + c = -a.
-Skip duplicates after processing each element.
+1. Sort the array → Helps in avoiding duplicates.
+2. Fix one element (i), then use Two-Pointer approach to find b + c = -a.
+3. Skip duplicates after processing each element.
 
 Time O(n^2), space O(1)
 */

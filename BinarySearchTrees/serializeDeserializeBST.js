@@ -40,6 +40,7 @@ function serialize(root) {
             result.push(null);
         }
     }
+    //don't forget this part.
     return JSON.stringify(result);
 }
 
@@ -49,9 +50,10 @@ function deserialize(data) {
     let nodes = JSON.parse(data);
     if (!nodes.length) return null;
     
+    //the root is always initialized at the top
     let root = new TreeNode(nodes[0]);
     let queue = [root];
-    let i = 1;
+    let i = 1; //don't forget this part
 
     while (queue.length) {
         let node = queue.shift();
