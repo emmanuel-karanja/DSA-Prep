@@ -39,31 +39,36 @@ function mergeKSortedArrays(arrays) {
 
 /**Divide and Conquer, is still O(nlogk) */
 
-function mergeKSortedArrays(arrays) {
-    if (!arrays.length) return [];
+function mergeKArrays(arrays) {
+    if (!arrays || arrays.length === 0) return [];
 
-    function mergeTwo(arr1, arr2) {
-        let i = 0, j = 0;
-        const result = [];
+    return mergeRange(arrays, 0, arrays.length - 1);
+}
 
-        while (i < arr1.length && j < arr2.length) {
-            if (arr1[i] < arr2[j]) {
-                result.push(arr1[i++]);
-            } else {
-                result.push(arr2[j++]);
-            }
+function mergeRange(arrays, left, right) {
+    if (left === right) return arrays[left]; // base case
+
+    const mid = Math.floor((left + right) / 2);
+    const leftMerged = mergeRange(arrays, left, mid);
+    const rightMerged = mergeRange(arrays, mid + 1, right);
+
+    return mergeTwoArrays(leftMerged, rightMerged);
+}
+
+function mergeTwoArrays(a, b) {
+    const result = [];
+    let i = 0, j = 0;
+
+    while (i < a.length && j < b.length) {
+        if (a[i] < b[j]) {
+            result.push(a[i++]);
+        } else {
+            result.push(b[j++]);
         }
-        return result.concat(arr1.slice(i)).concat(arr2.slice(j));
     }
 
-    function mergeHelper(start, end) {
-        if (start === end) return arrays[start];
+    while (i < a.length) result.push(a[i++]);
+    while (j < b.length) result.push(b[j++]);
 
-        const mid = Math.floor((start + end) / 2);
-        const left = mergeHelper(start, mid);
-        const right = mergeHelper(mid + 1, end);
-        return mergeTwo(left, right);
-    }
-
-    return mergeHelper(0, arrays.length - 1);
+    return result;
 }
