@@ -10,6 +10,7 @@ function productExceptSelf(nums) {
     }
 
     let suffix = 1;
+    //subtle, don't miss that the suffix starts from the back at n-1
     for (let i = n - 1; i >= 0; i--) {
         result[i] =result[i] * suffix; // Multiply by suffix product
         suffix =suffix* nums[i]; // Accumulate suffix product

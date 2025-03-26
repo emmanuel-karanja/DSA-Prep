@@ -10,7 +10,8 @@
 Commonly used Distance functions:
 
 1. Euclidean distance
-2. Manhattan distance--for grid based search
+2. Manhattan distance--Manhattan distance is the total number of steps you’d take if you could only move up, 
+                       down, left, or right (not diagonally) on a grid — like you're walking through city blocks in Manhattan.
 3. Cosine similarity--for text/data similarity problems
 
 */

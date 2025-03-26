@@ -118,3 +118,6 @@ function maxSlidingWindow(nums, k) {
 
     return result;
 }
+
+
+console.log(maxSlidingWindow(nums,k))
