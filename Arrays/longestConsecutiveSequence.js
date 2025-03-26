@@ -43,7 +43,7 @@ function longestConsecutive(nums) {
 
 function longestConsecutiveArray(nums) {
     const numSet = new Set(nums);
-    let longest = 0;
+    let longestStreak = 0;
     let result = [];
 
     for (const num of numSet) {
@@ -59,14 +59,14 @@ function longestConsecutiveArray(nums) {
                 currentSeq.push(currentNum); //only push after confirming it exists
             }
 
-            if (currentStreak > longest) {
-                longest = currentStreak;
+            if (currentStreak > longestStreak) {
+                longestStreak = currentStreak;
                 result = currentSeq;
             }
         }
     }
 
-    return [longest, result];
+    return [longestStreak, result];
 }
 
 

@@ -16,6 +16,8 @@
     
     Worst Case: Time O(N^2)
     Average Case: Time(nlongn)
+
+    *Use the three heights matrix e.g. [4,1,6] for your manual dry run on a page.
            
     */
 

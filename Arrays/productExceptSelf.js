@@ -6,13 +6,13 @@ function productExceptSelf(nums) {
     let prefix = 1;
     for (let i = 0; i < n; i++) {
         result[i] = prefix;
-        prefix *= nums[i]; // Accumulate prefix product
+        prefix =prefix  nums[i]; // Accumulate prefix product
     }
 
     let suffix = 1;
     for (let i = n - 1; i >= 0; i--) {
-        result[i] *= suffix; // Multiply by suffix product
-        suffix *= nums[i]; // Accumulate suffix product
+        result[i] =result[i] * suffix; // Multiply by suffix product
+        suffix =suffix* nums[i]; // Accumulate suffix product
     }
 
     return result;
