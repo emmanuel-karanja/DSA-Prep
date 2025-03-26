@@ -40,5 +40,7 @@ function insertInterval(intervals, newInterval) {
     return result;
 }
 
-const interval=[[1,2],[3,5],[6,7],[8,10],[12,16]]
+const intervals=[[1,2],[3,5],[6,7],[8,10],[12,16]]
 const newInterval=[4,8]
+
+console.log(insertInterval(intervals,newInterval))

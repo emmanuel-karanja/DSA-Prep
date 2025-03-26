@@ -14,6 +14,7 @@ function canAttendMeetings(intervals) {
     intervals.sort((a, b) => a[0] - b[0]); // Sort by start time
 
     for (let i = 1; i < intervals.length; i++) {
+        //interval formulae Max(a1,b1) <= Min(a2.b2)
         if (intervals[i][0] < intervals[i - 1][1]) {
             return false; // Overlap found
         }
