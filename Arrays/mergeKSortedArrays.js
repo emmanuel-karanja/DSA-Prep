@@ -1,4 +1,5 @@
 /**I had the pairwise merge algorithm which is pretty good. But I hear there is the MinHeap version
+ * but the one below is as efficient as the MinHeap version, it does it in O(nlogn)
  * 
  */
 

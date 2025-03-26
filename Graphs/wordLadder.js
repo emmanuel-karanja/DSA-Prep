@@ -27,14 +27,14 @@ function ladderLength(beginWord, endWord, wordList) {
     const queue = [[beginWord, 1]];
     visited.add(beginWord);
   
-    const startChar = 'a'.charCodeAt(0);
-    const endChar = 'z'.charCodeAt(0);
+    const aChar = 'a'.charCodeAt(0);
+    const zChar = 'z'.charCodeAt(0);
   
     while (queue.length > 0) {
       const [word, level] = queue.shift();
   
       for (let i = 0; i < word.length; i++) {
-        for (let c = startChar; c <= endChar; c++) {
+        for (let c = aChar; c <= zChar; c++) {
             //test out word formed by iterating chars from 'a' to 'z'.
           const nextWord = word.slice(0, i) + String.fromCharCode(c) + word.slice(i + 1);
   

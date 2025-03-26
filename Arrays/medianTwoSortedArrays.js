@@ -47,7 +47,8 @@ function findMedianSortedArrays(nums1, nums2) {
     let low = 0, high = x; //note this carefully, we are using the smaller of the two arrays
 
     while (low <= high) {
-        let partitionX = Math.floor((low + high) / 2);
+        let partitionX = Math.floor((low + high) / 2);// this is computed dynamically and
+        //impacts PartitionY
         let partitionY = Math.floor((x + y + 1) / 2) - partitionX;
 
         // Handle edges
