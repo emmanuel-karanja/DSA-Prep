@@ -7,4 +7,6 @@ let schedules = [
 
 const flattened=schedules.reduce((acc,curr)=>acc.concat(curr),[]);
 
-console.log(flattened)
+console.log("hardway",flattened)
+
+console.log("easyway",schedules.flat())

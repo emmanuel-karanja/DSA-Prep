@@ -17,6 +17,14 @@
  * 6. The 2 is added to account for the edge connect left subtree to the root and for the other edge
  *    connecting the right right subtree to the root.
  * 
+ * Why do we calculate the diameter inside the height function?
+ * 
+ * If you try to calculate diameter in a separate traversal:
+
+1. You’d have to recompute heights multiple times.
+2. That would be inefficient: O(n²) in worst case.
+
+But when you compute it inside the same traversal, it stays O(n) — optimal.
  * */
 
 class TreeNode {

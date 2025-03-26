@@ -14,7 +14,7 @@ function insertInterval(intervals, newInterval) {
     let i = 0;
     const n = intervals.length;
 
-    // Add all intervals before the new interval (no overlap)
+    // Add all intervals before the new interval (no overlap), i.e. end before the start of the current interval start
     while (i < n && intervals[i][1] < newInterval[0]) {
         result.push(intervals[i]);
         i++;
