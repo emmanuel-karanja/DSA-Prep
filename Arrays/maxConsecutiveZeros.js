@@ -3,11 +3,9 @@
  * 
  * LOGIC:
  * 
- Use a sliding window to track a subarray, and only allow at most k zeroes in the current window.
-
-Expand the right boundary (right) of the window
-
-Count the number of zeroes inside the window
+ 1. Use a sliding window to track a subarray, and only allow at most k zeroes in the current window.
+ 2. Expand the right boundary (right) of the window
+ 3. Count the number of zeroes inside the window
 
 If zeroes > k, shrink from the left (left) until valid again
  * */

@@ -1,13 +1,10 @@
 /**Given a binary array move zeroes to one side in O(n)
  * 
  * LOGIC:\
-Instead of pushing zeroes to the end (which is common), this time we want them at the beginning. The idea is:
-
-Traverse the array from end to start
-
-Copy non-zero elements to the back of the array (from the last index)
-
-Fill the remaining positions with 0
+1. Instead of pushing zeroes to the end (which is common), this time we want them at the beginning. The idea is:
+2. Traverse the array from end to start
+3. Copy non-zero elements to the back of the array (from the last index)
+4. Fill the remaining positions with 0
  */
 
 function moveZeroesToStart(arr) {
