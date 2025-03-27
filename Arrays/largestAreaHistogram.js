@@ -60,7 +60,7 @@ function largestRectangleArea(heights) {
     let maxArea = 0;
 
     // Add a sentinel bar of height 0 at the end to flush out the stack
-    heights.push(0);
+    heights.push(0); //I didn't notice this before
 
     for (let i = 0; i < heights.length; i++) {
         while (stack.length > 0 && heights[i] < heights[stack[stack.length - 1]]) {
@@ -72,6 +72,7 @@ function largestRectangleArea(heights) {
 
             const area = height * width;
             maxArea = Math.max(maxArea, area);
+            console.log("index:",i,"stack:",stack,"area:",area,"maxArea:",maxArea)
         }
 
         stack.push(i);
