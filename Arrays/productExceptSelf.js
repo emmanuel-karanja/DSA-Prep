@@ -1,19 +1,29 @@
+/**Given an array of numbers find the array containing the product of a number at i except self.
+ * Don't use division and do it in O(n)
+ * 
+ * LOGIC:
+ * We’ll build the solution in two passes:
+
+1. Left pass — for each index i, store the product of all elements to the left of i.
+2. Right pass — for each index i, multiply by the product of all elements to the right of i.
+ */
+
 
 function productExceptSelf(nums) {
-    let n = nums.length;
-    let result = new Array(n).fill(1);
+    const n = nums.length;
+    const result = Array(n).fill(1);
 
-    let prefix = 1;
+    let leftProduct = 1;
     for (let i = 0; i < n; i++) {
-        result[i] = prefix;
-        prefix =prefix * nums[i]; // Accumulate prefix product
+        result[i] = leftProduct;
+        //this is the next leftProduct we are calculating here
+        leftProduct =leftProduct * nums[i];
     }
 
-    let suffix = 1;
-    //subtle, don't miss that the suffix starts from the back at n-1
+    let rightProduct = 1;
     for (let i = n - 1; i >= 0; i--) {
-        result[i] =result[i] * suffix; // Multiply by suffix product
-        suffix =suffix* nums[i]; // Accumulate suffix product
+        result[i] = result[i] * rightProduct;
+        rightProduct = rightProduct * nums[i];
     }
 
     return result;

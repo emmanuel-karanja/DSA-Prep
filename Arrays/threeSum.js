@@ -17,6 +17,14 @@ Logic:
 3. Skip duplicates after processing each element.
 
 Time O(n^2), space O(1)
+
+KEY WITH TWO POINTERS:
+
+1. Do the pointers begin on the same side or not?
+2. When do we update any of the pointers? 
+3. What's the termination condition?-->if the pointers converge i.e. start on opposite sides the condition is left != right
+   or until left===right. If they start on the same side, it's until right =end of array
+4. Also,when do we initialize each of them?
 */
 
 function threeSum(nums) {
