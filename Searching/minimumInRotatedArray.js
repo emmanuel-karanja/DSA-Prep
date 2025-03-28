@@ -13,6 +13,9 @@ Since the array is rotated, the smallest element is the pivot point where rotati
 - - Narrow down until left == right, which gives the minimum.
 
 Time O(logN)
+
+This can also be used to find the rotation count. Because left and right will converge to the minimum element
+and we return the index which gives us the rotation count.
 */
 
 function findMin(nums) {
