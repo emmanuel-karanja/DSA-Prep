@@ -39,3 +39,32 @@ function isBalanced(root) {
 
     return checkHeight(root) !== -1;
 }
+
+function isBalanced(root) {
+    if (!root) return true;
+
+    const stack = [[root, false]];
+    const heightMap = new Map();
+
+    while (stack.length > 0) {
+        const [node, visited] = stack.pop();
+
+        if (!node) continue;
+
+        if (visited) {
+            const left = heightMap.get(node.left) ?? 0;
+            const right = heightMap.get(node.right) ?? 0;
+
+            if (Math.abs(left - right) > 1) return false;
+
+            heightMap.set(node, Math.max(left, right) + 1);
+        } else {
+            stack.push([node, true]);
+            stack.push([node.right, false]);
+            stack.push([node.left, false]);
+        }
+    }
+
+    return true;
+}
+

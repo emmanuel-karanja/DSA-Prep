@@ -19,5 +19,5 @@ function findRotationCount(nums) {
         }
     }
 
-    return left; // Left (or right) is the index of the minimum element
+    return left; // Left (or right) is the index of the minimum element which is equal to the number of rotations
 }

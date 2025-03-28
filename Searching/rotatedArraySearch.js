@@ -41,3 +41,7 @@ function searchRotatedArray(nums, target) {
 
     return -1; // Not found
 }
+
+const arr=([4,5,6,7,0,1,2], 3)  
+
+console.log(searchRotatedArray(arr,3))
