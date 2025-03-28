@@ -29,6 +29,7 @@ class ListNode {
     while (current !== null) {
       next = current.next; // Store next node
       current.next = prev; // Reverse pointer
+      
       prev = current;      // Move prev forward
       current = next;      // Move current forward
     }
