@@ -7,6 +7,7 @@
  * 2. Find the height of the right subtree.
  * 3. Evaluate that condition.
  * 
+ * TREE is balanced if Abs(leftHeight-rightHeight) <=1
  * 
  * Time O(n) 
  * 
