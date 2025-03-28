@@ -49,6 +49,7 @@ function shortestBridge(grid) {
         for (const [dr, dc] of directions) {
             const nr = r + dr, nc = c + dc;
             if (nr >= 0 && nc >= 0 && nr < rows && nc < cols && !visited[nr][nc]) {
+                // exit as soon as you hit the 1. This is the most important part of this
                 if (grid[nr][nc] === 1) {
                     return dist; // Reached second island
                 }
