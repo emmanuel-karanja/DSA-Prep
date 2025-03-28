@@ -13,6 +13,8 @@
  *    that space i.e. nums[left] and nums[mid], if not, we search the other half, starting from
  *    mid+1 to right, and so on.
  * 4. Do the binary search on the sorted half.
+ * 
+ * >>The only special thing here is finding the sorted half and then do a binary search on it.
  * */
 
 function searchRotatedArray(nums, target) {
@@ -42,6 +44,6 @@ function searchRotatedArray(nums, target) {
     return -1; // Not found
 }
 
-const arr=([4,5,6,7,0,1,2], 3)  
+const arr=[4,5,6,7,0,1,2] 
 
-console.log(searchRotatedArray(arr,3))
+console.log(searchRotatedArray(arr,5))

@@ -31,3 +31,7 @@ function findMin(nums) {
 
     return nums[left]; // Left and right converge to the minimum
 }
+
+const arr=[4,5,6,7,0,1,2]
+
+console.log(findMin(arr))
