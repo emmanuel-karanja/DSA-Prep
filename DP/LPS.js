@@ -37,14 +37,18 @@ function longestPalindrome(s) {
                     dp[i][j] = dp[i + 1][j - 1]; //look at the previous one
                 }
 
+                //update length, check if wehave a palindrom and check if the length is greater than maxLen so far
                 if (dp[i][j] && (j - i + 1 > maxLen)) {
                     maxLen = j - i + 1;
                     start = i;
                 }
+
+                console.log("dp matrix",dp)
             }
         }
     }
 
+    //return the palindrome
     return s.slice(start, start + maxLen);
 }
 
