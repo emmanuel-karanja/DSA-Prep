@@ -115,10 +115,7 @@ function trapRainWater(heightMap) {
                 visited[x][y] = true;
                 const neighborHeight = heightMap[x][y];
                 water += Math.max(0, cell.height - neighborHeight);
-                heap.insert({
-                    x,
-                    y,
-                    height: Math.max(neighborHeight, cell.height)
+                heap.insert({x,y, height: Math.max(neighborHeight, cell.height)
                 });
             }
         }

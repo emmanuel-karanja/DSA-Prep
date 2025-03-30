@@ -20,9 +20,17 @@ HACK->Only three things:
 1. The directions
 2. The bounds i.e nc >-2 and nr >-2 
 3. Keep track of
+
+
+NOTE:
+
+1. Direction are [2,1] and one [1,2] and one can be negative or both can be negative.
+2. Weinsert the cordinates as a string `${x},${y}` since if we insert tuple [x,y] won't work
+   when we do visited.has([x,y]) but works for visited.has(${x},${y}`)
 */
 
 function minKnightMoves(x, y) {
+    //why do the abs?
     x = Math.abs(x);
     y = Math.abs(y);
 
@@ -36,13 +44,16 @@ function minKnightMoves(x, y) {
 
     while (queue.length > 0) {
         const [cx, cy, steps] = queue.shift();
+
+        //check if we have hit the target
         if (cx === x && cy === y) return steps;
 
         for (const [dx, dy] of directions) {
             const nx = cx + dx;
             const ny = cy + dy;
 
-            // Stay within a reasonable bound due to symmetry
+            // Stay within a reasonable bound due to symmetry,notice we story the co-ordinates as strings in the set
+            // if we add [x,y] it won'twork but it works for the string
             if (nx >= -2 && ny >= -2 && !visited.has(`${nx},${ny}`)) {
                 visited.add(`${nx},${ny}`);
                 queue.push([nx, ny, steps + 1]);

@@ -37,6 +37,7 @@ function pacificAtlantic(heights) {
         }
     }
 
+    //Do the waterflow, STARTING WITH THE BORDERS
     // Step 1: DFS from Pacific (top row and left column)
     for (let c = 0; c < cols; c++) dfs(0, c, pacific, heights[0][c]); // top
     for (let r = 0; r < rows; r++) dfs(r, 0, pacific, heights[r][0]); // left
