@@ -4,6 +4,20 @@ Given an array of integers, find the contiguous subarray with the largest sum.
 
 Time O(N) and Space O(1)*/
 
+function maxSubArray(nums) {
+    let maxEndingHere = nums[0];
+    let maxSoFar = nums[0];
+
+    for (let i = 1; i < nums.length; i++) {
+        let localMax=maxEndingHere+nums[i];
+        maxEndingHere = Math.max(nums[i], localMax);
+        maxSoFar = Math.max(maxSoFar, maxEndingHere);
+    }
+
+    return maxSoFar;
+}
+
+
 function maxSubarrayWithIndices(nums) {
     let maxEndingHere = nums[0], maxSoFar = nums[0];
     let start = 0, end = 0, tempStart = 0;
@@ -14,7 +28,7 @@ function maxSubarrayWithIndices(nums) {
             maxEndingHere = nums[i];
             tempStart = i; // Start new subarray
         } else {
-            maxEndingHere += nums[i]; // Extend subarray
+            maxEndingHere = localSum; // Extend subarray
         }
 
         if (maxEndingHere > maxSoFar) {

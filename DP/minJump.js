@@ -27,7 +27,8 @@ function minJumps(arr) {
     for (let i = 1; i < n; i++) {
         if (i == n - 1) return jumps; // Reached the last index
 
-        maxReach = Math.max(maxReach, i + arr[i]); // Extend max reach
+        let reachFromHere=i+arr[i];
+        maxReach = Math.max(maxReach, reachFromHere); // Extend max reach
         steps--; // Use a step
 
         if (steps == 0) { // Need a jump

@@ -1,3 +1,11 @@
+/**This is a variation of k-sum, specifically 4-sum.
+Here's how you can think of it:
+
+1.Sort the array. This helps skip duplicates and use two pointers efficiently.
+2.Fix the first two numbers using two loops.
+3.Use two pointers to find the remaining two numbers that add up to target - (first + second).
+4.Skip duplicates as you go. */
+
 function fourSum(nums, target) {
     nums.sort((a, b) => a - b);
     const result = [];
