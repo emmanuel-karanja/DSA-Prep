@@ -11,6 +11,27 @@ Always run the most frequent available task
 Wait (idle) only when all other tasks are cooling down
 This is a perfect setup for a MaxHeap (most frequent task comes out first).*/
 
+// Low budget maxHeap 
+class MaxHeap {
+    constructor() {
+        this.data = [];
+    }
+
+    insert(val) {
+        this.data.push(val);
+        this.data.sort((a, b) => b - a); // Max heap behavior
+    }
+
+    extractMax() {
+        return this.data.shift();
+    }
+
+    size() {
+        return this.data.length;
+    }
+}
+
+//Ask the interviewer if you can do this.
 function leastInterval(tasks, n) {
     const freqMap = {};
 
@@ -19,7 +40,7 @@ function leastInterval(tasks, n) {
         freqMap[task] = (freqMap[task] || 0) + 1;
     }
 
-    // 2. Use your MaxHeap (store just counts for now)
+    // 2. Use MaxHeap (store just counts)
     const heap = new MaxHeap();
     for (let count of Object.values(freqMap)) {
         heap.insert(count);
@@ -31,23 +52,30 @@ function leastInterval(tasks, n) {
     while (heap.size() > 0) {
         const temp = [];
 
-        // 1 cycle of n+1 slots
+        // Process (n + 1) tasks per cycle
         for (let i = 0; i <= n; i++) {
             if (heap.size() > 0) {
                 let count = heap.extractMax();
                 if (count > 1) {
-                    temp.push(count - 1); // decrease task count
+                    temp.push(count - 1); // Decrease task count
                 }
             }
             time++;
 
-            if (heap.size() === 0 && temp.length === 0) break; // we're done
+            // Only break if heap is empty AND no pending tasks
+            if (heap.size() === 0 && temp.length === 0) {
+                return time; // We are completely done
+            }
         }
 
+        // Reinsert remaining tasks
         for (let count of temp) {
-            heap.insert(count); // reinsert remaining tasks
+            heap.insert(count);
         }
     }
 
     return time;
 }
+
+// Example usage
+console.log(leastInterval(['A','A','A','B','B','B'], 2));

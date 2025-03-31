@@ -46,7 +46,6 @@ class MinHeap {
     _bubbleDown() {
         let i = 0;
         const length = this.data.length;
-        const el = this.data[0];
         while (true) {
             let left = 2 * i + 1;
             let right = 2 * i + 2;
