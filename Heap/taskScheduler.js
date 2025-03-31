@@ -68,7 +68,7 @@ function leastInterval(tasks, n) {
             }
         }
 
-        // Reinsert remaining tasks
+        // Reinsert remaining tasks after a complete cycle
         for (let count of temp) {
             heap.insert(count);
         }
