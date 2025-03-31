@@ -33,3 +33,8 @@ function coinChange(coins, amount) {
 
     return dp[amount] === Infinity ? -1 : dp[amount];
 }
+
+// Example usage
+console.log(coinChange([1, 2, 5], 11)); // Output: 3 (5 + 5 + 1)
+console.log(coinChange([2], 3));        // Output: -1 (impossible)
+console.log(coinChange([1], 0));    

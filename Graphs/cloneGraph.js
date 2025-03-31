@@ -54,3 +54,42 @@ node3.neighbors = [node1, node2];
 
 const cloned = cloneGraph(node1);
 console.log(cloned);
+
+
+/**Iterative */
+
+class Node {
+    constructor(val, neighbors = []) {
+        this.val = val;
+        this.neighbors = neighbors;
+    }
+}
+
+var cloneGraph = function(node) {
+    if (!node) return null;
+
+    // Map to store cloned nodes
+    let clones = new Map();
+    clones.set(node, new Node(node.val));
+
+    // Stack for DFS traversal
+    let stack = [node];
+
+    while (stack.length) {
+        let current = stack.pop();
+
+        for (let neighbor of current.neighbors) {
+            if (!clones.has(neighbor)) {
+                // Clone the neighbor if not already cloned
+                clones.set(neighbor, new Node(neighbor.val));
+                stack.push(neighbor);
+            }
+
+            // Connect the cloned node with its cloned neighbors
+            clones.get(current).neighbors.push(clones.get(neighbor));
+        }
+    }
+
+    return clones.get(node);
+};
+
