@@ -44,7 +44,7 @@ function buildGraph(words) {
 
         // use minLength
         for (let j = 0; j < minLength; j++) {
-            if (word1[j] !== word2[j]) {
+            if (word1[j] !== word2[j]) { // we skip identical chars
                 if (!graph.get(word1[j]).has(word2[j])) { //not already added to the graph
                     graph.get(word1[j]).add(word2[j]);
                     inDegree.set(word2[j], inDegree.get(word2[j]) + 1);
