@@ -3,7 +3,7 @@
 
 🧠 Intuition:
  We slide a window of size k across the array, and:
-  1.Maintain a queue of indices of negative numbers.
+  1. Maintain a queue of indices of negative numbers.
   2. As the window moves, remove indices that fall out of the window.
   3. The first index in the queue is the first negative number in the current window.
   

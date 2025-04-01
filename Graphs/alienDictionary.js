@@ -6,76 +6,89 @@
 
     From all these rules, you can build a graph and use topological sorting to find a valid character order.
 
-    Build the graph:
+1. Build a graph (Directed Acyclic Graph - DAG)
+     - Each character is a node.
+     - If a character x comes before y in two adjacent words, create a directed edge x → y.
+     - Keep track of in-degree (how many times a character depends on another).
+2. Topological Sorting (Kahn’s Algorithm - BFS)
+     - Use a queue to process characters with an in-degree of 0 (independent characters).
+     - Append each processed character to the result.
+     - Decrease the in-degree of its neighbors.
+     - If a cycle is detected (not all nodes are processed), return "" (invalid order)
 
-1. Nodes = all unique characters.
-2. Edges = char1 → char2 (char1 comes before char2).
-
-3. Build in-degree map:
-    - Keeps track of how many characters must come before each character.
-    - Topological sort using BFS (Kahn's algorithm):
-    - Start with nodes that have in-degree 0.
-4. Pop from queue, add to result, and reduce in-degree of neighbors.
+Time O(C+V+E)  C is the sum of characters across the words
 */
 
-function alienOrder(words) {
-    const graph = buildGraph(words);
-    if (!graph) return ""; // invalid case like prefix issue
-    return topologicalSort(graph);
-}
-
-// Step 1: Build the graph based on order of characters
 function buildGraph(words) {
-    const graph = new Map();
+    let graph = new Map();
+    let inDegree = new Map();
 
-    // Initialize nodes
-    for (const word of words) {
-        for (const char of word) {
+    // Initialize graph with unique characters
+    for (let word of words) {
+        for (let char of word) {
             if (!graph.has(char)) graph.set(char, new Set());
+            if (!inDegree.has(char)) inDegree.set(char, 0);
         }
     }
 
-    // Build directed edges
+    // Add directed edges based on precedence rules
     for (let i = 0; i < words.length - 1; i++) {
-        const [first, second] = [words[i], words[i + 1]];
-        if (first.length > second.length && first.startsWith(second)) {
-            return null; // invalid input, prefix issue
+        let word1 = words[i];
+        let word2 = words[i + 1];
+        let minLength = Math.min(word1.length, word2.length);
+
+        // Edge case: "abc" -> "ab" (invalid order)
+        if (word1.length > word2.length && word1.startsWith(word2)) {
+            return null; // Cycle detected , early cycle detection
         }
 
-        for (let j = 0; j < Math.min(first.length, second.length); j++) {
-            if (first[j] !== second[j]) {
-                graph.get(first[j]).add(second[j]);
-                break;
+        // use minLength
+        for (let j = 0; j < minLength; j++) {
+            if (word1[j] !== word2[j]) {
+                if (!graph.get(word1[j]).has(word2[j])) { //not already added to the graph
+                    graph.get(word1[j]).add(word2[j]);
+                    inDegree.set(word2[j], inDegree.get(word2[j]) + 1);
+                }
+                break; // Only the first different character matters
             }
         }
     }
 
-    return graph;
+    return { graph, inDegree };
 }
 
-// Step 2: Perform topological sort using DFS
-function topologicalSort(graph) {
-    const visited = new Map(); // 'visiting', 'visited'
-    const result = [];
+function topologicalSort(graph, inDegree) {
+    let queue = [];
+    let order = "";
 
-    for (const node of graph.keys()) {
-        if (!dfs(node, graph, visited, result)) return ""; // cycle detected
+    // Start with nodes having in-degree 0
+    for (let [char, count] of inDegree) {
+        if (count === 0) queue.push(char);
     }
 
-    return result.reverse().join('');
-}
+    while (queue.length > 0) {
+        let char = queue.shift();
+        order += char; //update order here
 
-// Step 3: DFS helper for topological sort
-function dfs(node, graph, visited, result) {
-    if (visited.get(node) === 'visiting') return false; // cycle
-    if (visited.get(node) === 'visited') return true;
-
-    visited.set(node, 'visiting');
-    for (const neighbor of graph.get(node)) {
-        if (!dfs(neighbor, graph, visited, result)) return false;
+        for (let neighbor of graph.get(char)) {
+            inDegree.set(neighbor, inDegree.get(neighbor) - 1);
+            if (inDegree.get(neighbor) === 0) queue.push(neighbor);
+        }
     }
-    visited.set(node, 'visited');
-    result.push(node);
 
-    return true;
+    // Check for cycle (if not all characters are processed)
+    return order.length === graph.size ? order : "";
 }
+
+function alienOrder(words) {
+    let result = buildGraph(words);
+    if (!result) return ""; // Invalid order detected
+
+    let { graph, inDegree } = result;
+    return topologicalSort(graph, inDegree);
+}
+
+// Example usage
+console.log(alienOrder(["wrt", "wrf", "er", "ett", "rftt"])); // Output: "wertf"
+console.log(alienOrder(["z", "x"])); // Output: "zx"
+console.log(alienOrder(["z", "x", "z"])); // Output: "" (Cycle detected)
