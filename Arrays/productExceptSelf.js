@@ -10,37 +10,6 @@
 
 //Time O(n) and Space O(n)
 
-function productExceptSelf(nums) {
-    const n = nums.length;
-
-    //initialize, the first in any of the arrays will always be 1.
-    const leftProduct = Array(n).fill(1);
-    const rightProduct = Array(n).fill(1);
-    const result = Array(n).fill(1);
-
-    // Compute leftProduct, i from 1since we need i-1 to work
-    for (let i = 1; i < n; i++) {
-        //product of all the numbers left of nums[i]
-        leftProduct[i] = nums[i - 1] * leftProduct[i - 1];
-    }
-
-    // Compute rightProduct
-    for (let i = n - 2; i >= 0; i--) {
-        // product of all the numbers right of nums[i]
-        rightProduct[i] = nums[i + 1] * rightProduct[i + 1];
-    }
-
-    // Multiply left and right
-    for (let i = 0; i < n; i++) {
-        result[i] = leftProduct[i] * rightProduct[i];
-    }
-
-    return result;
-}
-
-
-//Time O(n) and space  O(n)
-
 
 function productExceptSelfOptimal(nums) {
     const n = nums.length;

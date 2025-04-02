@@ -29,7 +29,7 @@ function searchRotatedArray(nums, target) {
         if (nums[left] <= nums[mid]) { // Left half sorted
             if (nums[left] <= target && target < nums[mid]) {
                 right = mid - 1; // Search left
-            } else {
+            } else { //search right section
                 left = mid + 1; // Search right
             }
         } else { // Right half sorted

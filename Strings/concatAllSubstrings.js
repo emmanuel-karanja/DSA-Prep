@@ -34,8 +34,7 @@ function findSubstring(s, words) {
     if (!s || words.length === 0) return [];
     
     let wordLen = words[0].length;
-    let wordCount = words.length;
-    let totalLen = wordLen * wordCount;
+    let requiredCount = words.length; //basically we'veall them them or we could simply iterate over the wordMap and sum the values
     let wordMap = new Map();
     let result = [];
 
@@ -48,7 +47,7 @@ function findSubstring(s, words) {
     for (let i = 0; i < wordLen; i++) {
         let left = i, right = i;
         let currentWindowMap = new Map();
-        let count = 0;
+        let foundCount = 0;
 
         //iterate to the end, but we move in wordLen steps and not 1s.
         while (right + wordLen <= s.length) {
@@ -58,27 +57,25 @@ function findSubstring(s, words) {
 
             if (wordMap.has(word)) { //the word has to first exist in the wordMap otherwise, we move on.
                 currentWindowMap.set(word, (currentWindowMap.get(word) || 0) + 1);
-                count++;
-
-                console.log("currentWindowMap:",currentWindowMap,"wordMap:",wordMap,"currentWord:",word,"count:",count)
+                foundCount++; //we've found
 
                 // If word frequency exceeds expected count, shift left, shrink window by advancing left
                 while (currentWindowMap.get(word) > wordMap.get(word)) {
                     let leftWord = s.substring(left, left + wordLen);
                     //decrement word count from the currentWordMap
                     currentWindowMap.set(leftWord, currentWindowMap.get(leftWord) - 1);
-                    left += wordLen;
-                    count--;
+                    left += wordLen; //advance left
+                    foundCount--;
                 }
 
                 // If all words match, store the start index
-                if (count === wordCount) {
+                if (foundCount === requiredCount) {
                     result.push(left);
                 }
             } else {
                 // Reset the window when encountering an invalid word
                 currentWindowMap.clear(); // I didn't know you could do this.
-                count = 0;
+                foundCount = 0;
                 left = right;
             }
         }
