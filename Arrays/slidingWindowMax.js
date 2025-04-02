@@ -100,8 +100,8 @@ function maxSlidingWindow(nums, k) {
             deque.shift();
         }
 
-        // Remove smaller elements from the back of deque
-        while (deque.length && nums[deque[deque.length - 1]] < nums[i]) {
+        // Remove smaller elements from the back of deque, we look from the end because we already know the largest element is towards the end.
+        while (deque.length && nums[deque[deque.length - 1]] < nums[i]) { //for sliding window min, only the sign here changes
             deque.pop();
         }
 
@@ -121,3 +121,35 @@ function maxSlidingWindow(nums, k) {
 console.log(maxSlidingWindow([1,3,-1,-3,5,3,6,7], 3)); 
 // Output: [3,3,5,5,6,7]
 
+function minSlidingWindow(nums, k) {
+    if (!nums.length) return [];
+
+    let result = [];
+    let deque = []; // Stores indices of useful elements
+
+    for (let i = 0; i < nums.length; i++) {
+        // Remove elements not in the sliding window
+        if (deque.length && deque[0] === i - k) {
+            deque.shift();
+        }
+
+        // Remove larger elements from the back of deque
+        while (deque.length && nums[deque[deque.length - 1]] > nums[i]) {
+            deque.pop();
+        }
+
+        // Push the current element index
+        deque.push(i);
+
+        // Append the minimum for the current window
+        if (i >= k - 1) {
+            result.push(nums[deque[0]]);
+        }
+    }
+    
+    return result;
+}
+
+// Example usage:
+console.log(minSlidingWindow([1,3,-1,-3,5,3,6,7], 3)); 
+// Output: [-1,-3,-3,-3,3,3]
