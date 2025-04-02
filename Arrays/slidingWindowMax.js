@@ -89,35 +89,35 @@ We iterate over the array and:
  */
 
 function maxSlidingWindow(nums, k) {
-    const deque = [];  // will store indices
-    const result = [];
+    if (!nums.length) return [];
+
+    let result = [];
+    let deque = []; // Stores indices of useful elements
 
     for (let i = 0; i < nums.length; i++) {
-
-        // Remove elements outside the window.
-        // i-k is the index of the element that just slid out, the current deque[0] is i-k+1
-        //At index i, the window contains indices [i - k + 1, i]. 
-        if (deque.length && deque[0] <= i - k) {
+        // Remove elements not in the sliding window
+        if (deque.length && deque[0] === i - k) { //this condition makes sense
             deque.shift();
         }
 
-        // Remove smaller elements from back, this is the same logic as a monotonic stack
-        while (deque.length && nums[i] > nums[deque[deque.length - 1]]) {
-            //remove all elements currenyl less than nums[i]
+        // Remove smaller elements from the back of deque
+        while (deque.length && nums[deque[deque.length - 1]] < nums[i]) {
             deque.pop();
         }
 
-        //if nums[i] we add it to the deque either we've emptied the deque or we find one smaller
+        // Push the current element index
         deque.push(i);
 
-        //when we've a window sized k, push the results at the first position i.e. the max
-        if (i >= k - 1) {
+        // Append the maximum for the current window
+        if (i >= k - 1) { //if we had k=3 to get a window from the start we need 0,1,2 to have the proper size window
             result.push(nums[deque[0]]);
         }
     }
-
+    
     return result;
 }
 
+// Example usage:
+console.log(maxSlidingWindow([1,3,-1,-3,5,3,6,7], 3)); 
+// Output: [3,3,5,5,6,7]
 
-console.log(maxSlidingWindow(nums,k))
