@@ -26,11 +26,8 @@ function numIslands(grid) {
 
     function dfs(r, c) {
         //check that we are not out of bounds.
-        if (r < 0 || c < 0 || r >= rows || c >= cols) return;
-           
-        //If the current cell is 0, return.
-        if(grid[r][c] === '0') return;
-
+        if (r < 0 || c < 0 || r >= rows || c >= cols || grid[r][c]==='0') return;
+        
         //else visit it.
         grid[r][c] = '0'; // Mark as visited, you can label it as anything including two
 

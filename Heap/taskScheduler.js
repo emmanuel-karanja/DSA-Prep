@@ -55,9 +55,9 @@ function leastInterval(tasks, n) {
         // Process (n + 1) tasks per cycle
         for (let i = 0; i <= n; i++) {
             if (heap.size() > 0) {
-                let count = heap.extractMax();
-                if (count > 1) {
-                    temp.push(count - 1); // Decrease task count
+                let currentTaskCount= heap.extractMax();
+                if (currentTaskCount > 1) {
+                    temp.push(currentTaskCount - 1); // Decrease task count
                 }
             }
             time++;

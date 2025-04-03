@@ -67,7 +67,8 @@ function largestRectangleArea(heights) {
             const poppedIndex = stack.pop();
             const height = heights[poppedIndex];
 
-            // Width is current index - index of previous smaller element - 1
+            // what this means is that if the current stack is empty, then, the current width is the current index,
+            //stack[stack.length-1] is the index of the previous smallest width
             const width = stack.length === 0 ? i : i - stack[stack.length - 1] - 1;
 
             const area = height * width;
