@@ -16,7 +16,7 @@ Each word is a node, and an edge exists if two words differ by exactly one lette
 
 That turns the problem into a shortest path in an unweighted graph, which can be solved using BFS.
 
-
+Time O(N*L) where L is the letter count per word and N is the dictionary size. 
 */
 
 function ladderLength(beginWord, endWord, wordList) {
@@ -24,7 +24,7 @@ function ladderLength(beginWord, endWord, wordList) {
     if (!wordSet.has(endWord)) return 0;
   
     const visited = new Set();
-    const queue = [[beginWord, 1]];
+    const queue = [[beginWord, 1]]; //level begins at 1.
     visited.add(beginWord);
   
     const aChar = 'a'.charCodeAt(0);
@@ -35,10 +35,11 @@ function ladderLength(beginWord, endWord, wordList) {
   
       for (let i = 0; i < word.length; i++) {
         for (let c = aChar; c <= zChar; c++) {
-            //test out word formed by iterating chars from 'a' to 'z'.
+            //test out word formed by iterating chars from 'a' to 'z'. Generate a new word by changing a character
+            //at every position of the word
           const nextWord = word.slice(0, i) + String.fromCharCode(c) + word.slice(i + 1);
   
-          //early return
+          //early return, we've reached the end and we return
           if (nextWord === endWord) return level + 1;
   
           if (wordSet.has(nextWord) && !visited.has(nextWord)) {

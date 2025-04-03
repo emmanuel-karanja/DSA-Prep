@@ -20,7 +20,7 @@ function spiralOrder(matrix) {
         for (let j = left; j <= right; j++) {
             result.push(matrix[top][j]);
         }
-        top++;
+        top++; //prepare for the next round by moving to the next row
 
         // Move down
         for (let i = top; i <= bottom; i++) {
