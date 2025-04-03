@@ -8,6 +8,7 @@ function rotateMatrix90(matrix) {
             const temp = matrix[i][j];
             matrix[i][j] = matrix[j][i];
             matrix[j][i] = temp;
+            //this also works:  [matrix[i][j], matrix[j][i]] = [matrix[j][i], matrix[i][j]];
         }
     }
 
