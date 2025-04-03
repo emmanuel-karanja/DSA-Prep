@@ -1,39 +1,45 @@
-/**Given a string s, find the length of the longest substring that contains only unique characters
- *  (no repeating characters). 
+/** 
+ * Given a string s, find the length of the longest substring that contains only unique characters.
  * 
- * LOGIC:
- * We can solve this problem efficiently using the Sliding Window + Two Pointers technique.
-
-1️ Use a left pointer (l) and a right pointer (r) to maintain a dynamic window.
-2️ Expand r (right pointer) until we find a duplicate character. How? We keep a set where every character
-  encountered is stored and we check with every new character encountered is already in the set
-3️ Once a duplicate is found, move l to remove characters until uniqueness is restored.
-4️ Keep track of the maximum length of a valid window.
-5.Left pointer points at the start of that sub-string.
- * */
-
+ * Approach: Sliding Window + Two Pointers
+ * 1️ Use a left pointer (l) and a right pointer (r) to maintain a dynamic window.
+ * 2️ Expand r (right pointer) until we find a duplicate character.
+ * 3️ Once a duplicate is found, move l to remove characters until uniqueness is restored.
+ * 4️ Track the maximum length of a valid window.
+ */
 function longestUniqueSubstring(s) {
-    let charSet = new Set();
-    let left = 0, maxLength = 0, startIdx = 0;
-    let longestSubstring = "";
+    let charSet = new Set(); // To store unique characters in the window
+    let left = 0; // Left pointer of the window
+    let maxLength = 0; // Maximum length of a valid substring found
+    let startIdx = 0; // Starting index of the longest unique substring
 
     for (let right = 0; right < s.length; right++) {
-        //reduce the sliding wndow size
+        // While we find a duplicate, shrink the window by moving left pointer
         while (charSet.has(s[right])) {
-            charSet.delete(s[left]);
-            left++;
+            charSet.delete(s[left]); // Remove the character at the left pointer
+            left++; // Shrink the window from the left
         }
 
+        // Add the current character to the set (valid character in the window)
         charSet.add(s[right]);
 
-        // Update the longest substring when a new max length is found
+        // Update the maximum length and starting index of the longest substring
         if (right - left + 1 > maxLength) {
             maxLength = right - left + 1;
             startIdx = left;
         }
     }
 
-    longestSubstring = s.substring(startIdx, startIdx + maxLength);
+    // Get the longest substring using the start index and the max length
+    const longestSubstring = s.substring(startIdx, startIdx + maxLength);
     return { length: maxLength, substring: longestSubstring };
 }
 
+// Example Driver Code
+const s1 = "abcabcbb";
+console.log(longestUniqueSubstring(s1)); 
+// Output: { length: 3, substring: "abc" }
+
+const s2 = "bbbbb";
+console.log(longestUniqueSubstring(s2)); 
+// Output: { length: 1, substring: "b
