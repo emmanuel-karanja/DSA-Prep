@@ -13,10 +13,12 @@ for memory optimization.
 */
 
 // Definition for a binary tree node.
-function TreeNode(val, left = null, right = null) {
-    this.val = val;
-    this.left = left;
-    this.right = right;
+class TreeNode {
+    constructor(val, left = null, right = null){
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
 }
 
  function flatten (root) {

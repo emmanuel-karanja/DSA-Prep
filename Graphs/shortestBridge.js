@@ -51,10 +51,10 @@ function shortestBridge(grid) {
             if (nr >= 0 && nc >= 0 && nr < rows && nc < cols && !visited[nr][nc]) {
                 // exit as soon as you hit the 1. This is the most important part of this
                 if (grid[nr][nc] === 1) {
-                    return dist; // Reached second island
+                    return dist; // Reached second island, exit
                 }
                 visited[nr][nc] = true;
-                queue.push([nr, nc, dist + 1]);
+                queue.push([nr, nc, dist + 1]); //continue
             }
         }
     }

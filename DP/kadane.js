@@ -2,20 +2,24 @@
 Problem Statement
 Given an array of integers, find the contiguous subarray with the largest sum.
 
+DECISION: Should we extend the previous subarray or start a new subarray from nums[i]?
+Which is  currentSum=max(nums[i],currentSum+nums[i])
+
 Time O(N) and Space O(1)*/
 
 function maxSubArray(nums) {
-    let maxEndingHere = nums[0];
+    let currentSum = nums[0];
     let maxSoFar = nums[0];
 
     for (let i = 1; i < nums.length; i++) {
-        let localMax=maxEndingHere+nums[i];
-        maxEndingHere = Math.max(nums[i], localMax);
-        maxSoFar = Math.max(maxSoFar, maxEndingHere);
+        currentSum = Math.max(nums[i], currentSum+nums[i]);
+        //update max
+        maxSoFar = Math.max(maxSoFar, currentSum);
     }
 
     return maxSoFar;
 }
+
 
 
 function maxSubarrayWithIndices(nums) {
@@ -26,7 +30,7 @@ function maxSubarrayWithIndices(nums) {
         let localSum=maxEndingHere+nums[i];
         if (nums[i] > localSum) {
             maxEndingHere = nums[i];
-            tempStart = i; // Start new subarray
+            tempStart = i; // Start new subarray, we could be starting here
         } else {
             maxEndingHere = localSum; // Extend subarray
         }
@@ -43,6 +47,7 @@ function maxSubarrayWithIndices(nums) {
 
 // Example Usage
 console.log(maxSubarrayWithIndices([-2,1,-3,4,-1,2,1,-5,4]));
+console.log("newTest:",maxSubArray([1,2,-1,3]))
 // Output: { maxSum: 6, subarray: [4, -1, 2, 1] }
 
 
