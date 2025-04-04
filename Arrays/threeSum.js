@@ -28,31 +28,50 @@ KEY WITH TWO POINTERS:
 */
 
 function threeSum(nums) {
-    nums.sort((a, b) => a - b);  // Step 1: Sort the array
-    let result = [];
-
+    // Step 1: Sort the array
+    nums.sort((a, b) => a - b);
+    
+    const result = [];
+    
+    // Step 2: Iterate through the array
     for (let i = 0; i < nums.length - 2; i++) {
-        if (i > 0 && nums[i] === nums[i - 1]) continue;  // Skip duplicates
-
-        let left = i + 1, right = nums.length - 1;
+        // Skip duplicate values for 'i'
+        if (i > 0 && nums[i] === nums[i - 1]) continue;
+        
+        let left = i + 1; // Left pointer
+        let right = nums.length - 1; // Right pointer
+        
+        // Step 3: Use two pointers to find the other two elements
         while (left < right) {
-            let sum = nums[i] + nums[left] + nums[right];
-
+            const sum = nums[i] + nums[left] + nums[right];
+            
             if (sum === 0) {
+                // If we find a triplet, add it to the result
                 result.push([nums[i], nums[left], nums[right]]);
                 
-                while (left < right && nums[left] === nums[left + 1]) left++;  // Skip duplicates
-                while (left < right && nums[right] === nums[right - 1]) right--;  // Skip duplicates
+                // Skip duplicates for the 'left' pointer
+                while (left < right && nums[left] === nums[left + 1]) left++;
                 
+                // Skip duplicates for the 'right' pointer
+                while (left < right && nums[right] === nums[right - 1]) right--;
+                
+                // Move both pointers
                 left++;
                 right--;
             } else if (sum < 0) {
-                left++;  // Need a larger number
+                // If the sum is less than zero, move the left pointer to the right
+                left++;
             } else {
-                right--; // Need a smaller number
+                // If the sum is greater than zero, move the right pointer to the left
+                right--;
             }
         }
     }
-
+    
     return result;
 }
+
+// Example usage:
+const nums = [-1, 0, 1, 2, -1, -4];
+const result = threeSum(nums);
+console.log(result);  // Output: [[-1, -1, 2], [-1, 0, 1]]

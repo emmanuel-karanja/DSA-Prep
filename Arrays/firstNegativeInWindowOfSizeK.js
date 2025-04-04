@@ -1,7 +1,7 @@
 /**Given an array arr[] and a positive integer k, for each window of size k, 
  * find the first negative number in that window. If there's no negative number in the window, output 0.
 
-🧠 Intuition:
+ Intuition:
  We slide a window of size k across the array, and:
   1. Maintain a queue of indices of negative numbers.
   2. As the window moves, remove indices that fall out of the window.

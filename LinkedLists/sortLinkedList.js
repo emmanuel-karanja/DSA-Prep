@@ -1,6 +1,6 @@
 // Merge Sort for Linked List using MergeSort
 function mergeSort(head) {
-    if (!head || !head.next) {
+    if (!head || !head.next) {  //easy to ignore this part
       return head;
     }
   
