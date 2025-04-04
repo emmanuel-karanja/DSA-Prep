@@ -42,6 +42,7 @@ function longestConsecutive(nums) {
 
 
 function longestConsecutiveArray(nums) {
+    //add them to a set
     const numSet = new Set(nums);
     let longestStreak = 0;
     let result = [];
