@@ -20,7 +20,7 @@ function groupAnagrams(words) {
         map.get(sorted).push(word);
     }
 
-    return Array.from(map.values());
+    return Array.from(map.values()); //finally create an array out of the values of the anagrams
 }
 
 // Test

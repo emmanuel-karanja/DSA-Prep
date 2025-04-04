@@ -20,7 +20,8 @@ function longestUniqueSubstring(s) {
             left++; // Shrink the window from the left
         }
 
-        // Add the current character to the set (valid character in the window)
+        // Add the current character to the set (valid character in the window), we re-add it since the one
+        //removed is the one pointed to by right.
         charSet.add(s[right]);
 
         // Update the maximum length and starting index of the longest substring

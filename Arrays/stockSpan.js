@@ -29,18 +29,18 @@ function stockSpanBruteForce(prices) {
     return span;
 }
 
-console.log("bruteForce",stockSpanBruteForce([100, 80, 60, 70, 60, 75, 85]));
+console.log("bruteForce:",stockSpanBruteForce([100, 80, 60, 70, 60, 75, 85]));
 // Output: [1, 1, 1, 2, 1, 4, 6]
 
 
-//Optimal using monotonic increasing stack Time O(n)
+//Optimal using monotonic decreasing stack Time O(n)
 function stockSpan(prices) {
     let span = new Array(prices.length);
     let stack = []; // Stack stores indices
 
     for (let i = 0; i < prices.length; i++) {
         // Remove elements from stack that are smaller or equal to current price
-        while (stack.length > 0 && prices[stack[stack.length - 1]] <= prices[i]) {
+        while (stack.length > 0 && prices[i] >=prices[stack[stack.length - 1]] ) {
             stack.pop();
         }
 
@@ -59,5 +59,5 @@ function stockSpan(prices) {
 }
 
 // Test
-console.log("optimal",stockSpan([100, 80, 60, 70, 60, 75, 85]));
+console.log("optimal:",stockSpan([100, 80, 60, 70, 60, 75, 85]));
 // Output: [1, 1, 1, 2, 1, 4, 6]
