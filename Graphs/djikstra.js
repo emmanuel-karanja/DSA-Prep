@@ -13,7 +13,7 @@ class MinHeap {
         this.heap.sort((a, b) => a[0] - b[0]); // sort by distance
     }
 
-    pop() {
+    extractMin() {
         return this.heap.shift();
     }
 
@@ -35,7 +35,7 @@ function dijkstra(graph, start) {
     heap.push([0, start]);
 
     while (!heap.isEmpty()) {
-        const [dist, node] = heap.pop();
+        const [dist, node] = heap.extractMin();
 
         for (let [neighbor, weight] of graph[node]) {
             const newDist = dist + weight;
