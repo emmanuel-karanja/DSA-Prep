@@ -39,3 +39,9 @@ function firstNegativeInWindow(arr, k) {
 
     return result;
 }
+
+// Driver Code
+const arr1 = [12, -1, -7, 8, 15, 30, 16, 28];
+const k1 = 3;
+
+console.log(firstNegativeInWindow(arr1,k1))
