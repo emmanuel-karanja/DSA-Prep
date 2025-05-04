@@ -61,7 +61,7 @@ function topologicalSort(graph, inDegree) {
     let queue = [];
     let order = "";
 
-    // Start with nodes having in-degree 0
+    // Start with nodes having in-degree 0, and add them to the queue
     for (let [char, count] of inDegree) {
         if (count === 0) queue.push(char);
     }
@@ -71,6 +71,7 @@ function topologicalSort(graph, inDegree) {
         order += char; //update order here
 
         for (let neighbor of graph.get(char)) {
+            //visited is implicitly maintained by the inDegree count.
             inDegree.set(neighbor, inDegree.get(neighbor) - 1);
             if (inDegree.get(neighbor) === 0) queue.push(neighbor);
         }

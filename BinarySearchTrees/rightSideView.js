@@ -32,7 +32,7 @@ function rightSideView(root) {
         
         // Iterate over the nodes at the current level
         for (let i = 0; i < levelSize; i++) {
-            let node = queue.shift();
+            let node = queue.shift(); 
             
             // If we're at the rightmost node of the level, add it to the result
             if (i === levelSize - 1) {

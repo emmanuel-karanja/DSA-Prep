@@ -14,7 +14,7 @@ class MinHeap {
     }
 
     extractMin() {
-        return this.heap.shift();
+        return this.heap.shift(); //remove from the left end
     }
 
     isEmpty() {
@@ -39,7 +39,7 @@ function dijkstra(graph, start) {
 
         for (let [neighbor, weight] of graph[node]) {
             const newDist = dist + weight;
-
+           //this is called relaxation. 
             if (newDist < distances[neighbor]) {
                 distances[neighbor] = newDist;
                 heap.push([newDist, neighbor]);

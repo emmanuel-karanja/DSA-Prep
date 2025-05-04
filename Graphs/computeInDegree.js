@@ -18,6 +18,7 @@ function computeInDegree(graph) {
     }
 
     // Calculate in-degree by counting incoming edges
+    // what you are doing here is that for the current node, get all its neighbours and increment their inDegree by 1.
     for (let node in graph) {
         let neighbours=graph[node];
         if(neighbours){

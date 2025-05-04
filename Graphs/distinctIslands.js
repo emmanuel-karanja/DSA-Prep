@@ -21,7 +21,6 @@ At the end, the size of the set is your answer.
 function numDistinctIslands(grid) {
     const rows = grid.length;
     const cols = grid[0].length;
-    const visited = new Set();
     const shapes = new Set();
 
     function dfs(r, c, direction, path) {
@@ -39,7 +38,7 @@ function numDistinctIslands(grid) {
         dfs(r, c - 1, 'L', path); // Left
 
         //this is added here, this is what holds the structural info together 
-        path.push('B'); // Backtrack
+        path.push('B'); // Backtrack, fully explored
     }
 
     for (let r = 0; r < rows; r++) {
@@ -47,7 +46,9 @@ function numDistinctIslands(grid) {
             if (grid[r][c] === 1) {
                 const path = [];
                 dfs(r, c, 'S', path); // S = Start
+                console.log(path)
                 shapes.add(path.join(''));
+                console.log(shapes)
             }
         }
     }

@@ -50,6 +50,7 @@ function topView(root) {
   
     console.log("view of to topViewMap",topViewMap)
     const result = [];
+    
     for (let i = minHD; i <= maxHD; i++) {
       result.push(topViewMap.get(i));
     }
