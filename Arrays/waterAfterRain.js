@@ -13,23 +13,24 @@ function waterAfterRain(height = []) {
     if (height.length === 0) return 0;
 
     let left = 0, right = height.length - 1;
-    let leftMax = 0, rightMax = 0;
+    let leftMaxHeight = 0, rightMaxHeight = 0;
     let totalWater = 0;
 
     while (left < right) {
-        //compare height[left] and height[right]
+        //compare height[left] and height[right] i.e. if the left height is smaller, we know the amount
+        // of water is bounded by the left height and only advance the left pointer, otherwise, we advance right
         if (height[left] < height[right]) {
-            if (height[left] >= leftMax) {
-                leftMax = height[left];
+            if (height[left] >= leftMaxHeight) {
+                leftMaxHeight = height[left];
             } else {
-                totalWater += leftMax - height[left];
+                totalWater += leftMaxHeight - height[left];
             }
             left++;
         } else {
-            if (height[right] >= rightMax) {
-                rightMax = height[right];
+            if (height[right] >= rightMaxHeight) {
+                rightMaxHeight = height[right];
             } else {
-                totalWater += rightMax - height[right];
+                totalWater += rightMaxHeight - height[right];
             }
             right--;
         }

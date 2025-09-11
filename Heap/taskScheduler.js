@@ -52,11 +52,11 @@ function leastInterval(tasks, n) {
     while (heap.size() > 0) {
         const temp = [];
 
-        // Process (n + 1) tasks per cycle
+        // Process (n + 1) tasks per cycle, this loop simulates the time.
         for (let i = 0; i <= n; i++) {
             if (heap.size() > 0) {
                 let currentTaskCount= heap.extractMax();
-                if (currentTaskCount > 1) {
+                if (currentTaskCount > 1) {  //so when a task is completely done, we don't add it to the temp that way we ensure converage
                     temp.push(currentTaskCount - 1); // Decrease task count
                 }
             }

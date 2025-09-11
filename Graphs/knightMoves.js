@@ -25,6 +25,7 @@ HACK->Only three things:
 NOTE:
 
 1. Direction are [2,1] and one [1,2] and one can be negative or both can be negative.
+2. WE check boundsi.e. x >= -2
 2. Weinsert the cordinates as a string `${x},${y}` since if we insert tuple [x,y] won't work
    when we do visited.has([x,y]) but works for visited.has(${x},${y}`)
 */
