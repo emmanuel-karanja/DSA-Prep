@@ -1,59 +1,79 @@
+/*#/
 /**
- * Encode and Decode Strings
+ * Problem Definition:
+ * -------------------
+ * Design an algorithm to encode a list of strings into a single string 
+ * and decode that single string back into the original list.
+ * This ensures special characters (e.g., '#') inside the strings don’t break decoding.
+ * (LeetCode 271: Encode and Decode Strings)
+ *
+ * Example:
+ *   Input: ["lint","code","love","you"]
+ *   Encoded: "4#lint4#code4#love3#you"
+ *   Decoded: ["lint","code","love","you"]
+ *
+ * Intuition:
+ * ----------
+ * Prefix each string with its length and a delimiter (e.g., "#"). 
+ * During decoding, read the length, extract the following substring, 
+ * and repeat until the string ends. Using lengths ensures even if a string 
+ * contains '#', decoding remains unambiguous.
  *
  * Logic:
- * 1. Encoding:
- *    - For each string, prepend its length followed by '#' as a delimiter.
- *      Example: "hello" -> "5#hello"
- *    - Concatenate all encoded strings into one string.
+ * ------
+ * Encode:
+ *   - For each string s: append "len#s" to the result.
+ *   - Join all parts into one big string.
+ * Decode:
+ *   - Iterate through the string:
+ *     * Find '#' to locate the end of the length prefix.
+ *     * Parse the length.
+ *     * Extract the substring of that length after '#'.
+ *     * Repeat until reaching the end.
  *
- * 2. Decoding:
- *    - Start from index 0 of the encoded string.
- *    - Read characters until '#' to get the length of the next string.
- *    - Extract the next 'length' characters as the original string.
- *    - Repeat until reaching the end of the encoded string.
- *
- * Benefits:
- * - Handles any characters in strings, including '#' or digits.
- * - Unambiguous: length prefix ensures correct decoding.
- * 
- * Time Complexity: O(n) for both encode and decode, where n = total characters
- * Space Complexity: O(n) for encoded string and result list
+ * Complexity:
+ * -----------
+ * Time: O(N) for encoding and decoding combined, where N = total characters.
+ * Space: O(N) for the result.
  */
 
-class Codec {
-    // Encodes a list of strings to a single string
-    encode(strs) {
-        let encoded = '';
-        for (let s of strs) {
-            encoded += s.length + '#' + s; // length prefix + delimiter + string
-        }
-        return encoded;
-    }
-
-    // Decodes a single string back to a list of strings
-    decode(s) {
-        let decoded = [];
-        let i = 0;
-        while (i < s.length) {
-            // Find delimiter to get length of next string
-            let j = i;
-            while (s[j] !== '#') j++;
-            let length = parseInt(s.slice(i, j));
-            // Extract the string of given length
-            let str = s.slice(j + 1, j + 1 + length);
-            decoded.push(str);
-            // Move index to start of next encoded string
-            i = j + 1 + length;
-        }
-        return decoded;
-    }
+function encode(strs) {
+    // Encode each string as "length#string" and join them
+    return strs.map(s => s.length + '#' + s).join('');
 }
 
-// Example usage
-const codec = new Codec();
-const original = ["hello", "world", "123#abc"];
-const encoded = codec.encode(original);
-console.log("Encoded:", encoded);
-const decoded = codec.decode(encoded);
-console.log("Decoded:", decoded); // ["hello", "world", "123#abc"]
+function decode(s) {
+    const res = [];
+    let i = 0;
+
+    while (i < s.length) {
+        // Find the delimiter '#'
+        let j = i;
+        while (s[j] !== '#') j++;
+
+        // Parse the length of the next string
+        const len = parseInt(s.slice(i, j), 10);
+
+        // Extract the string of that length
+        const str = s.slice(j + 1, j + 1 + len);
+        res.push(str);
+
+        // Move pointer to the start of the next encoded string
+        i = j + 1 + len;
+    }
+
+    return res;
+}
+
+// -------- Driver Code --------
+function main() {
+    const strs = ["lint","code","love","you"];
+    const encoded = encode(strs);
+    const decoded = decode(encoded);
+
+    console.log(`Original: ${JSON.stringify(strs)}`);
+    console.log(`Encoded: "${encoded}"`);
+    console.log(`Decoded: ${JSON.stringify(decoded)}`); // Expected: ["lint","code","love","you"]
+}
+
+main();
