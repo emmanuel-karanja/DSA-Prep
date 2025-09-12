@@ -1,0 +1,14 @@
+[
+  {
+    "broker_id": 1,
+    "host": "192.168.1.101",
+    "port": 9092,
+    "log_dir": "/var/lib/kafka/broker1"
+  },
+  {
+    "broker_id": 2,
+    "host": "192.168.1.102",
+    "port": 9092,
+    "log_dir": "/var/lib/kafka/broker2"
+  }
+]
